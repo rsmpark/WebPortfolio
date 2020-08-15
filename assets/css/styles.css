@@ -95,6 +95,15 @@
   left: 0;
   z-index: var(--z-fixed);
   background-color: #fff;
+  transition: all 0.3s ease;
+  padding: 0 70px;
+}
+
+.l-header.hide {
+  top: -80px;
+}
+
+.l-header.shadow {
   box-shadow: 0 1px 4px rgba(146, 161, 176, 0.15);
 }
 

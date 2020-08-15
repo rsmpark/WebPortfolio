@@ -65,7 +65,7 @@ let w = window;
 let curScroll = (prevScroll = w.scrollY || doc.scrollTop);
 let curDirection = (prevDirection = 0);
 
-let header = document.getElementById('l-header');
+let header = document.getElementsByClassName('l-header');
 
 // scroll up - 1, scroll down - 2, initial - 0
 function checkScroll() {
@@ -79,13 +79,29 @@ function checkScroll() {
   }
 
   if (curDirection !== prevDirection) {
-    toggleHeader();
+    toggleHeaderHidden();
   }
+
+  toggleHeaderBoxShadow();
 
   prevDirection = curDirection;
   prevScroll = curScroll;
 }
 
-function toggleHeader() {}
+function toggleHeaderHidden() {
+  if (curDirection === 2) {
+    header[0].classList.add('hide');
+  } else if (curDirection === 1) {
+    header[0].classList.remove('hide');
+  }
+}
+
+function toggleHeaderBoxShadow() {
+  if (curScroll > 0) {
+    header[0].classList.add('shadow');
+  } else {
+    header[0].classList.remove('shadow');
+  }
+}
 
 window.addEventListener('scroll', checkScroll);
