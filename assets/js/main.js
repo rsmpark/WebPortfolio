@@ -35,12 +35,13 @@ const sr = ScrollReveal({
 });
 
 /*SCROLL HOME*/
-sr.reveal('.home__title', {});
-sr.reveal('.home__subtitle', { delay: 200 });
-sr.reveal('.home__desc', { delay: 300 });
-sr.reveal('.button', { delay: 400 });
-sr.reveal('.home__img', { delay: 400 });
-sr.reveal('.home__social-icon', { interval: 200 });
+sr.reveal('.home__span', {});
+sr.reveal('.home__title', { delay: 800 });
+sr.reveal('.home__subtitle', { delay: 800 });
+sr.reveal('.home__desc', { delay: 1400 });
+sr.reveal('.button', { delay: 1400 });
+sr.reveal('.home__img', { delay: 1800 });
+sr.reveal('.home__social-icon', { delay: 1800, interval: 400 });
 
 /*SCROLL ABOUT*/
 sr.reveal('.about__img', {});
