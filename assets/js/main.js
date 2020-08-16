@@ -31,17 +31,17 @@ const sr = ScrollReveal({
   origin: 'top',
   distance: '80px',
   duration: 2000,
-  reset: true,
+  reset: false,
 });
 
 /*SCROLL HOME*/
-sr.reveal('.home__span', {});
-sr.reveal('.home__title', { delay: 800 });
-sr.reveal('.home__subtitle', { delay: 800 });
-sr.reveal('.home__desc', { delay: 1400 });
-sr.reveal('.button', { delay: 1400 });
-sr.reveal('.home__img', { delay: 1800 });
-sr.reveal('.home__social-icon', { delay: 1800, interval: 400 });
+sr.reveal('.home__span', { cleanup: true });
+sr.reveal('.home__title', { delay: 800, cleanup: true });
+sr.reveal('.home__subtitle', { delay: 800, cleanup: true });
+sr.reveal('.home__desc', { delay: 1400, cleanup: true });
+sr.reveal('.button', { delay: 1400, cleanup: true });
+sr.reveal('.home__img', { delay: 1800, cleanup: true });
+sr.reveal('.home__social-icon', { delay: 1800, interval: 400, cleanup: true });
 
 /*SCROLL ABOUT*/
 sr.reveal('.about__img', {});
