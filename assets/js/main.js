@@ -27,82 +27,185 @@ function linkAction() {
 navLink.forEach((n) => n.addEventListener('click', linkAction));
 
 /*===== SCROLL REVEAL ANIMATION =====*/
-const sr = ScrollReveal({
-  origin: 'top',
-  distance: '80px',
-  duration: 2000,
-  reset: false,
+// const sr = ScrollReveal({
+//   origin: 'top',
+//   distance: '80px',
+//   duration: 2000,
+//   reset: false,
+// });
+
+// /*SCROLL HOME*/
+// sr.reveal('.home__span', { cleanup: true });
+// sr.reveal('.home__title', { delay: 800, cleanup: true });
+// sr.reveal('.home__subtitle', { delay: 800, cleanup: true });
+// sr.reveal('.home__desc', { delay: 1400, cleanup: true });
+// sr.reveal('.button', { delay: 1400, cleanup: true });
+// sr.reveal('.home__img', { delay: 1800, cleanup: true });
+// sr.reveal('.home__social-icon', { delay: 1800, interval: 400, cleanup: true });
+
+// /*SCROLL ABOUT*/
+// sr.reveal('.about__img', {});
+// sr.reveal('.about__subtitle', { delay: 400 });
+// sr.reveal('.about__text', { delay: 400 });
+
+// /*SCROLL SKILLS*/
+// sr.reveal('.skills__subtitle', {});
+// sr.reveal('.skills__text', {});
+// sr.reveal('.skills__data', { interval: 200 });
+// sr.reveal('.skills__img', { delay: 600 });
+
+// /*SCROLL WORK*/
+// sr.reveal('.work__img', { interval: 200 });
+
+// /*SCROLL CONTACT*/
+// sr.reveal('.contact__input', { interval: 200 });
+
+// let doc = document.documentElement;
+// let w = window;
+
+// let curScroll = (prevScroll = w.scrollY || doc.scrollTop);
+// let curDirection = (prevDirection = 0);
+
+// let header = document.getElementsByClassName('l-header');
+
+// // scroll up - 1, scroll down - 2, initial - 0
+// function checkScroll() {
+//   curScroll = w.scrollY || doc.scrollTop;
+
+//   if (curScroll > prevScroll) {
+//     // scrolled down
+//     curDirection = 2;
+//   } else {
+//     curDirection = 1;
+//   }
+
+//   if (curDirection !== prevDirection) {
+//     toggleHeaderHidden();
+//   }
+
+//   toggleHeaderBoxShadow();
+
+//   prevDirection = curDirection;
+//   prevScroll = curScroll;
+// }
+
+// function toggleHeaderHidden() {
+//   if (curDirection === 2) {
+//     header[0].classList.add('hide');
+//   } else if (curDirection === 1) {
+//     header[0].classList.remove('hide');
+//   }
+// }
+
+// function toggleHeaderBoxShadow() {
+//   if (curScroll > 0) {
+//     header[0].classList.add('shadow');
+//   } else {
+//     header[0].classList.remove('shadow');
+//   }
+// }
+
+// window.addEventListener('scroll', checkScroll);
+
+/* Experiences */
+let experiences = document.getElementsByClassName('experience__item');
+let experience__panels = document.getElementsByClassName('experience__panel');
+
+Array.from(experiences).forEach((elem, index) => {
+  elem.addEventListener('click', function () {
+    for (let panel of experience__panels) {
+      panel.classList.add('hidden');
+    }
+
+    experience__panels[index].classList.remove('hidden');
+  });
 });
 
-/*SCROLL HOME*/
-sr.reveal('.home__span', { cleanup: true });
-sr.reveal('.home__title', { delay: 800, cleanup: true });
-sr.reveal('.home__subtitle', { delay: 800, cleanup: true });
-sr.reveal('.home__desc', { delay: 1400, cleanup: true });
-sr.reveal('.button', { delay: 1400, cleanup: true });
-sr.reveal('.home__img', { delay: 1800, cleanup: true });
-sr.reveal('.home__social-icon', { delay: 1800, interval: 400, cleanup: true });
+// Collecting the sections
+var $sections = $('.section');
 
-/*SCROLL ABOUT*/
-sr.reveal('.about__img', {});
-sr.reveal('.about__subtitle', { delay: 400 });
-sr.reveal('.about__text', { delay: 400 });
+// Variable to hold the current section index
+var currentIndex = 0;
 
-/*SCROLL SKILLS*/
-sr.reveal('.skills__subtitle', {});
-sr.reveal('.skills__text', {});
-sr.reveal('.skills__data', { interval: 200 });
-sr.reveal('.skills__img', { delay: 600 });
+// Variable to hold the animation state
+var isAnimating = false;
 
-/*SCROLL WORK*/
-sr.reveal('.work__img', { interval: 200 });
+// Define the animation finish callback
+var stopAnimation = function () {
+  // We add the 300 ms timeout to debounce the mouse wheel event
+  setTimeout(function () {
+    // Set the animation state to false
+    isAnimating = false;
+  }, 300);
+};
 
-/*SCROLL CONTACT*/
-sr.reveal('.contact__input', { interval: 200 });
+// Function returns true if DOM element bottom is reached
+var bottomIsReached = function ($elem) {
+  var rect = $elem[0].getBoundingClientRect();
+  return rect.bottom <= $(window).height();
+};
 
-let doc = document.documentElement;
-let w = window;
+// Function returns true if DOM element top is reached
+var topIsReached = function ($elem) {
+  var rect = $elem[0].getBoundingClientRect();
+  return rect.top >= 0;
+};
 
-let curScroll = (prevScroll = w.scrollY || doc.scrollTop);
-let curDirection = (prevDirection = 0);
+// Define wheel event handler
+document.addEventListener(
+  'wheel',
+  function (event) {
+    // If animation is in progress
+    if (isAnimating) {
+      // Just prevent the default mouse wheel behaviour
+      console.log('scrolling');
+      event.preventDefault();
+      return;
+    }
 
-let header = document.getElementsByClassName('l-header');
+    // Get the current section
+    var $currentSection = $($sections[currentIndex]);
 
-// scroll up - 1, scroll down - 2, initial - 0
-function checkScroll() {
-  curScroll = w.scrollY || doc.scrollTop;
+    // Get the mouse wheel spin direction
+    var direction = event.deltaY;
 
-  if (curScroll > prevScroll) {
-    // scrolled down
-    curDirection = 2;
-  } else {
-    curDirection = 1;
-  }
-
-  if (curDirection !== prevDirection) {
-    toggleHeaderHidden();
-  }
-
-  toggleHeaderBoxShadow();
-
-  prevDirection = curDirection;
-  prevScroll = curScroll;
-}
-
-function toggleHeaderHidden() {
-  if (curDirection === 2) {
-    header[0].classList.add('hide');
-  } else if (curDirection === 1) {
-    header[0].classList.remove('hide');
-  }
-}
-
-function toggleHeaderBoxShadow() {
-  if (curScroll > 0) {
-    header[0].classList.add('shadow');
-  } else {
-    header[0].classList.remove('shadow');
-  }
-}
-
-window.addEventListener('scroll', checkScroll);
+    if (direction > 0) {
+      // If next index is greater than sections count, do nothing
+      if (currentIndex + 1 >= $sections.length) return;
+      // If bottom is not reached allow the default behaviour
+      if (!bottomIsReached($currentSection)) return;
+      // Go to next
+      // Increase the section pointer
+      currentIndex++;
+      // Get the next section
+      var $nextSection = $($sections[currentIndex]);
+      // Get the next section offset
+      var offsetTop = $nextSection.offset().top;
+      // Prevent the default mouse wheel behaviour
+      event.preventDefault();
+      // Set the animation state to true
+      isAnimating = true;
+      // Animate scroll
+      $('html, body').animate({ scrollTop: offsetTop }, 150, stopAnimation);
+    } else {
+      // If previous index is negative, do nothing
+      if (currentIndex - 1 < 0) return;
+      // If top is not reached allow the default behaviour
+      if (!topIsReached($currentSection)) return;
+      // Go to prev
+      // Decrease the section pointer
+      currentIndex--;
+      // Get the previous section
+      var $previousSection = $($sections[currentIndex]);
+      // Get the previous section offset
+      var offsetTop = $previousSection.offset().top;
+      // Prevent the default mouse wheel behaviour
+      event.preventDefault();
+      // Set the animation state to true
+      isAnimating = true;
+      // Animate scroll
+      $('html, body').animate({ scrollTop: offsetTop }, 150, stopAnimation);
+    }
+  },
+  { passive: false }
+);
