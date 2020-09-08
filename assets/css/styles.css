@@ -14,15 +14,16 @@
 :root {
   --first-color: #c3c3c3;
   --second-color: #fbfbfb;
-  --bg-color: rgb(19, 19, 19);
+  --bg-color: rgb(30, 30, 30);
   --first-font: #fff;
 }
 
 /*===== Font =====*/
 :root {
-  --body-font: 'Poppins', sans-serif;
+  --body-font: Calibre, 'San Francisco', 'SF Pro Text', -apple-system, system-ui,
+    BlinkMacSystemFont, Roboto, 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
   --big-font-size: 3rem;
-  --h2_font_size: 2.25rem;
+  --h2_font_size: 2rem;
   --normal-font-size: 0.938rem;
 }
 
@@ -68,13 +69,26 @@ body {
 .section-title::after {
   position: absolute;
   content: '';
-  width: 64px;
-  height: 0.18rem;
-  left: 6em;
+  width: 14px;
+  height: 0.09rem;
   margin: auto;
   top: 2rem;
   background-color: var(--first-color);
 }
+
+.about .section-title::after {
+  left: 5.5em;
+}
+.skills .section-title::after {
+  left: 3em;
+}
+.experience .section-title::after {
+  left: 6.2em;
+}
+.work .section-title::after {
+  left: 3em;
+}
+
 .section {
   padding-top: 4rem;
   padding-bottom: 2rem;
@@ -189,6 +203,7 @@ body {
 }
 .home__data {
   align-self: center;
+  margin-bottom: 110px;
 }
 
 .home__title {
@@ -271,18 +286,83 @@ body {
 .about__container {
   row-gap: 2rem;
   text-align: center;
-  grid-column-gap: 5rem;
+  grid-column-gap: 8rem;
   margin: 0;
+  line-height: 26px;
+  grid-template-rows: 700px;
 }
 .about__subtitle {
   margin-bottom: var(--mb-2);
 }
 .about__img {
   justify-self: flex-start;
+  position: relative;
 }
+
+.about__img .img__border:after {
+  top: 20px;
+  left: 20px;
+  z-index: -1;
+  border-width: 2px;
+  border-style: solid;
+  border-color: rgb(255, 255, 255);
+  border-image: initial;
+  content: '';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+}
+
 .about__img img {
   width: 200px;
   border-radius: 0.5rem;
+}
+
+.about__info {
+  height: 600px;
+  overflow: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.about__info::-webkit-scrollbar {
+  display: none;
+}
+
+.about__text {
+  font-size: 18px;
+  line-height: 32px;
+}
+
+.about__tech {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(140px, 240px));
+  overflow: hidden;
+  padding: 0px;
+  margin: 20px 0px 0px;
+  list-style: none;
+}
+
+.tech__item {
+  align-self: center;
+  position: relative;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  font-family: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono',
+    'Lucida Console', Monaco, monospace;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.tech__item::before {
+  content: '▹';
+  position: absolute;
+  left: 0px;
+  font-size: 14px;
+  line-height: 12px;
+  bottom: 30%;
 }
 
 /* ===== SKILLS =====*/
@@ -370,7 +450,7 @@ body {
   padding: 0px 20px 2px;
   transition: all 0.35s cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
   border: none;
-  border-left: 2px solid rgb(48, 60, 85);
+  border-left: 2px solid var(--first-color);
 }
 
 .experience__item button.active {
@@ -380,8 +460,8 @@ body {
 .experience__item button:hover,
 .experience__item button:active,
 .experience__item button:focus {
-  background-color: #0e2431;
-  color: rgb(100, 255, 218);
+  background-color: rgba(255, 255, 255, 0.25);
+  color: rgb(0, 0, 0);
   outline: 0px;
 }
 
@@ -477,7 +557,7 @@ body {
     margin-bottom: var(--mb-6);
   }
   .section-title::after {
-    width: 80px;
+    width: 280px;
     top: 1.5rem;
   }
 
@@ -520,7 +600,7 @@ body {
 
   .about__container,
   .skills__container {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 35% 50%;
     align-items: flex-start;
     text-align: initial;
   }

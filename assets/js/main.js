@@ -121,14 +121,21 @@ Array.from(experiences).forEach((elem, index) => {
   });
 });
 
+/* Scroll Logic */
+
 // Collecting the sections
 var $sections = $('.section');
+var $about = $('.about__info');
 
 // Variable to hold the current section index
 var currentIndex = 0;
 
 // Variable to hold the animation state
 var isAnimating = false;
+
+// Variable to hold the state if about_info has reached bottom/top
+var isBottom = false;
+var isTop = false;
 
 // Define the animation finish callback
 var stopAnimation = function () {
@@ -157,8 +164,7 @@ document.addEventListener(
   function (event) {
     // If animation is in progress
     if (isAnimating) {
-      // Just prevent the default mouse wheel behaviour
-      console.log('scrolling');
+      // console.log('scrolling');
       event.preventDefault();
       return;
     }
@@ -169,43 +175,75 @@ document.addEventListener(
     // Get the mouse wheel spin direction
     var direction = event.deltaY;
 
-    if (direction > 0) {
-      // If next index is greater than sections count, do nothing
-      if (currentIndex + 1 >= $sections.length) return;
-      // If bottom is not reached allow the default behaviour
-      if (!bottomIsReached($currentSection)) return;
-      // Go to next
-      // Increase the section pointer
-      currentIndex++;
-      // Get the next section
-      var $nextSection = $($sections[currentIndex]);
-      // Get the next section offset
-      var offsetTop = $nextSection.offset().top;
-      // Prevent the default mouse wheel behaviour
-      event.preventDefault();
-      // Set the animation state to true
-      isAnimating = true;
-      // Animate scroll
-      $('html, body').animate({ scrollTop: offsetTop }, 150, stopAnimation);
+    if (currentIndex !== 1) {
+      if (direction > 0) {
+        // If next index is greater than sections count, do nothing
+        if (currentIndex + 1 >= $sections.length) return;
+        // If bottom is not reached allow the default behaviour
+        if (!bottomIsReached($currentSection)) return;
+        // Go to next
+        goToNextSection(event);
+      } else {
+        // If previous index is negative, do nothing
+        if (currentIndex - 1 < 0) return;
+        // If top is not reached allow the default behaviour
+        if (!topIsReached($currentSection)) return;
+        // Go to prev
+        goToPrevSection(event);
+      }
     } else {
-      // If previous index is negative, do nothing
-      if (currentIndex - 1 < 0) return;
-      // If top is not reached allow the default behaviour
-      if (!topIsReached($currentSection)) return;
-      // Go to prev
-      // Decrease the section pointer
-      currentIndex--;
-      // Get the previous section
-      var $previousSection = $($sections[currentIndex]);
-      // Get the previous section offset
-      var offsetTop = $previousSection.offset().top;
-      // Prevent the default mouse wheel behaviour
       event.preventDefault();
-      // Set the animation state to true
-      isAnimating = true;
-      // Animate scroll
-      $('html, body').animate({ scrollTop: offsetTop }, 150, stopAnimation);
+      if (direction < 0) $about.scrollTop($about.scrollTop() - 65);
+      else if (direction > 0) $about.scrollTop($about.scrollTop() + 65);
+
+      if ($about.scrollTop() + $about.innerHeight() >= $about[0].scrollHeight) {
+        if (isBottom) {
+          goToNextSection(event);
+          isBottom = false;
+        } else {
+          setTimeout(function () {
+            isBottom = true;
+          }, 300);
+        }
+      } else if ($about.scrollTop() === 0) {
+        if (isTop) {
+          goToPrevSection(event);
+          isTop = false;
+        } else {
+          setTimeout(function () {
+            isTop = true;
+          }, 300);
+        }
+      }
     }
   },
   { passive: false }
 );
+
+function goToPrevSection(event) {
+  currentIndex--;
+  // Get the previous section
+  var $previousSection = $($sections[currentIndex]);
+  // Get the previous section offset
+  var offsetTop = $previousSection.offset().top;
+  // Prevent the default mouse wheel behaviour
+  event.preventDefault();
+  // Set the animation state to true
+  isAnimating = true;
+  // Animate scroll
+  $('html, body').animate({ scrollTop: offsetTop }, 150, stopAnimation);
+}
+
+function goToNextSection(event) {
+  currentIndex++;
+  // Get the next section
+  var $nextSection = $($sections[currentIndex]);
+  // Get the next section offset
+  var offsetTop = $nextSection.offset().top;
+  // Prevent the default mouse wheel behaviour
+  event.preventDefault();
+  // Set the animation state to true
+  isAnimating = true;
+  // Animate scroll
+  $('html, body').animate({ scrollTop: offsetTop }, 150, stopAnimation);
+}
