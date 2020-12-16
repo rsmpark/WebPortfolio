@@ -317,7 +317,6 @@ body {
 
 .about__img img {
   width: 200px;
-  border-radius: 0.5rem;
 }
 
 .about__info {
@@ -383,28 +382,30 @@ body {
   position: relative;
   font-weight: var(--font-semi);
   padding: 0.5rem 1rem;
-  margin-bottom: var(--mb-4);
-  border-radius: 0.5rem;
+  margin-bottom: var(--mb-3);
   box-shadow: 0 4px 25px rgba(14, 36, 49, 0.15);
 }
+
+.skills__data .skills__icon{
+  width: 100px;
+}
+
 .skills__icon {
   font-size: 2rem;
   margin-right: var(--mb-2);
   color: var(--first-color);
 }
+
+.skills__icon.sm img {
+  height: 50px;
+}
 .skills__names {
   display: flex;
   align-items: center;
+  font-size:14px;
+  height:45px;
 }
-.skills__bar {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  background-color: var(--first-color);
-  height: 0.25rem;
-  border-radius: 0.5rem;
-  z-index: var(--z-back);
-}
+
 .skills__html {
   width: 95%;
 }
@@ -418,7 +419,6 @@ body {
   width: 85%;
 }
 .skills__img {
-  border-radius: 0.5rem;
 }
 
 /* ===== EXPERIENCE =====*/
@@ -469,8 +469,19 @@ body {
   margin: 0 0 10px;
 }
 
+.experience__panel{
+  height: 600px;
+  overflow-y: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 .experience__panel.hidden {
   display: none;
+}
+
+.experience__panel::-webkit-scrollbar {
+  /* display: none; */
 }
 
 .panel__info ul li {
@@ -479,12 +490,55 @@ body {
   margin-bottom: 10px;
 }
 
-.panel__info ul li::before {
+.panel__info .drop_arrow{
+  position: absolute;
+    left: 9px;
+}
+
+.panel__info ul li li::before {
   content: '▹';
   position: absolute;
   left: 0px;
   color: var(--first-font);
 }
+
+
+.panel__info ul li .inner_list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(140px, 340px));
+  max-width: 600px;
+  overflow: hidden;
+  padding: 0px;
+  margin: 20px auto;
+  list-style: none;
+  height: 0;
+  transition: all 0.5s ease;
+}
+
+.panel__info ul li .inner_list.drop__active {
+  height: 200px;
+}
+
+
+.panel__info ul li .inner_list .inner_list__items  {
+  align-self: center;
+  position: relative;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  font-family: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono',
+    'Lucida Console', Monaco, monospace;
+  font-size: 13px;
+  line-height: 20px;
+  height: 0;
+  transition: all 1.5s ease;
+
+}
+
+.panel__info ul li .inner_list .inner_list__items.drop__active{
+  height: 40px;
+}
+
+
 
 /* ===== WORK =====*/
 .work__container {
@@ -492,7 +546,7 @@ body {
 }
 .work__img {
   box-shadow: 0 4px 25px rgba(14, 36, 49, 0.15);
-  border-radius: 0.5rem;
+
   overflow: hidden;
 }
 .work__img img {
@@ -603,6 +657,14 @@ body {
     grid-template-columns: 35% 50%;
     align-items: flex-start;
     text-align: initial;
+  }
+
+  .skills__container{
+    grid-template-columns: repeat(3, 1fr);
+    align-items: flex-start;
+    text-align: initial;
+    margin: 0 auto;
+  }
   }
   .about__img img {
     width: 400px;

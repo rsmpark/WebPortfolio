@@ -108,24 +108,47 @@ navLink.forEach((n) => n.addEventListener('click', linkAction));
 // window.addEventListener('scroll', checkScroll);
 
 /* Experiences */
-let experiences = document.getElementsByClassName('experience__item');
-let experience__panels = document.getElementsByClassName('experience__panel');
+let $expItems = $('.experience__item');
+let $expPanels = $('.experience__panel');
 
-Array.from(experiences).forEach((elem, index) => {
-  elem.addEventListener('click', function () {
-    for (let panel of experience__panels) {
-      panel.classList.add('hidden');
-    }
+$expItems.on('click', function () {
+  let idx = $($expItems).index(this);
+  $expPanels.addClass('hidden');
+  $expPanels.eq(idx).removeClass('hidden');
+});
 
-    experience__panels[index].classList.remove('hidden');
-  });
+// Array.from(experiences).forEach((elem, index) => {
+//   elem.addEventListener('click', function () {
+//     for (let panel of experience__panels) {
+//       panel.classList.add('hidden');
+//     }
+
+//     experience__panels[index].classList.remove('hidden');
+//   });
+// });
+
+$('.panel__info .drop_arrow').on('click', function () {
+  let idx = $(this).parent().index();
+
+  if (!$('.panel__info ul li .inner_list').eq(idx).hasClass('drop__active')) {
+    $('.panel__info ul li .inner_list').eq(idx).addClass('drop__active');
+    $('.panel__info ul li .inner_list')
+      .eq(idx)
+      .find('.inner_list__items')
+      .addClass('drop__active');
+  } else {
+    $('.panel__info ul li .inner_list').eq(idx).removeClass('drop__active');
+    $('.panel__info ul li .inner_list')
+      .eq(idx)
+      .find('.inner_list__items')
+      .removeClass('drop__active');
+  }
 });
 
 /* Scroll Logic */
 
 // Collecting the sections
 var $sections = $('.section');
-var $about = $('.about__info');
 
 // Variable to hold the current section index
 var currentIndex = 0;
@@ -175,7 +198,7 @@ document.addEventListener(
     // Get the mouse wheel spin direction
     var direction = event.deltaY;
 
-    if (currentIndex !== 1) {
+    if (currentIndex !== 3) {
       if (direction > 0) {
         // If next index is greater than sections count, do nothing
         if (currentIndex + 1 >= $sections.length) return;
@@ -193,10 +216,23 @@ document.addEventListener(
       }
     } else {
       event.preventDefault();
-      if (direction < 0) $about.scrollTop($about.scrollTop() - 65);
-      else if (direction > 0) $about.scrollTop($about.scrollTop() + 65);
+      console.log('Starting scrollTop:' + $expPanel.scrollTop());
+      if (direction < 0) $expPanel[0].scrollTop($expPanel.scrollTop() - 65);
+      else if (direction > 0)
+        $expPanel[0].scrollTop($expPanel.scrollTop() + 65);
+      console.log(
+        'scrollTop changed:' + $('.experience__panel')[0].scrollTop()
+      );
+      console.log(
+        'currentHeight' + ($expPanel.scrollTop() + $expPanel.innerHeight())
+      );
+      console.log('scrollHeight' + $expPanel[0].scrollHeight);
 
-      if ($about.scrollTop() + $about.innerHeight() >= $about[0].scrollHeight) {
+      if (
+        $expPanel.scrollTop() + $expPanel.innerHeight() >=
+        $expPanel[0].scrollHeight
+      ) {
+        console.log('scrollHeight is smaller');
         if (isBottom) {
           goToNextSection(event);
           isBottom = false;
@@ -205,7 +241,9 @@ document.addEventListener(
             isBottom = true;
           }, 300);
         }
-      } else if ($about.scrollTop() === 0) {
+      } else if ($expPanel.scrollTop() === 0) {
+        console.log('top');
+
         if (isTop) {
           goToPrevSection(event);
           isTop = false;
