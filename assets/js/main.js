@@ -110,38 +110,25 @@ navLink.forEach((n) => n.addEventListener('click', linkAction));
 /* Experiences */
 let $expItems = $('.experience__item');
 let $expPanels = $('.experience__panel');
+var panelIndex = 1;
+var $currPanel = $expPanels.eq(panelIndex);
 
 $expItems.on('click', function () {
-  let idx = $($expItems).index(this);
+  panelIndex = $($expItems).index(this);
   $expPanels.addClass('hidden');
-  $expPanels.eq(idx).removeClass('hidden');
+  $expPanels.eq(panelIndex).removeClass('hidden');
+  $currPanel = $expPanels.eq(panelIndex);
 });
 
-// Array.from(experiences).forEach((elem, index) => {
-//   elem.addEventListener('click', function () {
-//     for (let panel of experience__panels) {
-//       panel.classList.add('hidden');
-//     }
-
-//     experience__panels[index].classList.remove('hidden');
-//   });
-// });
-
-$('.panel__info .drop_arrow').on('click', function () {
+$('.panel__info .text__container').on('click', function () {
   let idx = $(this).parent().index();
 
-  if (!$('.panel__info ul li .inner_list').eq(idx).hasClass('drop__active')) {
-    $('.panel__info ul li .inner_list').eq(idx).addClass('drop__active');
-    $('.panel__info ul li .inner_list')
-      .eq(idx)
-      .find('.inner_list__items')
-      .addClass('drop__active');
+  console.log(idx);
+
+  if (!$('.panel__info ul li.info__items').eq(idx).hasClass('drop__active')) {
+    $('.panel__info ul li.info__items').eq(idx).addClass('drop__active');
   } else {
-    $('.panel__info ul li .inner_list').eq(idx).removeClass('drop__active');
-    $('.panel__info ul li .inner_list')
-      .eq(idx)
-      .find('.inner_list__items')
-      .removeClass('drop__active');
+    $('.panel__info ul li.info__items').eq(idx).removeClass('drop__active');
   }
 });
 
@@ -181,6 +168,9 @@ var topIsReached = function ($elem) {
   return rect.top >= 0;
 };
 
+let isPanelBottom = false;
+let isPanelTop = false;
+
 // Define wheel event handler
 document.addEventListener(
   'wheel',
@@ -216,41 +206,49 @@ document.addEventListener(
       }
     } else {
       event.preventDefault();
-      console.log('Starting scrollTop:' + $expPanel.scrollTop());
-      if (direction < 0) $expPanel[0].scrollTop($expPanel.scrollTop() - 65);
-      else if (direction > 0)
-        $expPanel[0].scrollTop($expPanel.scrollTop() + 65);
-      console.log(
-        'scrollTop changed:' + $('.experience__panel')[0].scrollTop()
-      );
-      console.log(
-        'currentHeight' + ($expPanel.scrollTop() + $expPanel.innerHeight())
-      );
-      console.log('scrollHeight' + $expPanel[0].scrollHeight);
 
-      if (
-        $expPanel.scrollTop() + $expPanel.innerHeight() >=
-        $expPanel[0].scrollHeight
-      ) {
-        console.log('scrollHeight is smaller');
-        if (isBottom) {
+      if (direction < 0) $currPanel.scrollTop($currPanel.scrollTop() - 15);
+      else if (direction > 0) $currPanel.scrollTop($currPanel.scrollTop() + 15);
+
+      if (!$currPanel.isYScrollable()) {
+        if (direction > 0) {
+          // If next index is greater than sections count, do nothing
+          if (currentIndex + 1 >= $sections.length) return;
+          // If bottom is not reached allow the default behaviour
+          if (!bottomIsReached($currentSection)) return;
+          // Go to next
           goToNextSection(event);
-          isBottom = false;
         } else {
-          setTimeout(function () {
-            isBottom = true;
-          }, 300);
-        }
-      } else if ($expPanel.scrollTop() === 0) {
-        console.log('top');
+          // If previous index is negative, do nothing
+          if (currentIndex - 1 < 0) return;
+          // If top is not reached allow the default behaviour
+          if (!topIsReached($currentSection)) return;
 
-        if (isTop) {
+          // Go to prev
           goToPrevSection(event);
-          isTop = false;
-        } else {
-          setTimeout(function () {
-            isTop = true;
-          }, 300);
+        }
+      } else {
+        if (
+          $currPanel.scrollTop() + $currPanel.innerHeight() >=
+          $currPanel[0].scrollHeight
+        ) {
+          if (isPanelBottom) {
+            goToNextSection(event);
+            isPanelBottom = false;
+          } else {
+            setTimeout(function () {
+              isPanelBottom = true;
+            }, 400);
+          }
+        } else if ($currPanel.scrollTop() === 0) {
+          if (isPanelTop) {
+            goToPrevSection(event);
+            isPanelTop = false;
+          } else {
+            setTimeout(function () {
+              isPanelTop = true;
+            }, 400);
+          }
         }
       }
     }
@@ -285,3 +283,7 @@ function goToNextSection(event) {
   // Animate scroll
   $('html, body').animate({ scrollTop: offsetTop }, 150, stopAnimation);
 }
+
+$.fn.isYScrollable = function () {
+  return this[0].scrollHeight > this[0].clientHeight;
+};
