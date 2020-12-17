@@ -125,10 +125,21 @@ $('.panel__info .text__container').on('click', function () {
 
   console.log(idx);
 
-  if (!$('.panel__info ul li.info__items').eq(idx).hasClass('drop__active')) {
-    $('.panel__info ul li.info__items').eq(idx).addClass('drop__active');
+  if (
+    !$currPanel
+      .find('.panel__info ul li.info__items')
+      .eq(idx)
+      .hasClass('drop__active')
+  ) {
+    $currPanel
+      .find('.panel__info ul li.info__items')
+      .eq(idx)
+      .addClass('drop__active');
   } else {
-    $('.panel__info ul li.info__items').eq(idx).removeClass('drop__active');
+    $currPanel
+      .find('.panel__info ul li.info__items')
+      .eq(idx)
+      .removeClass('drop__active');
   }
 });
 

@@ -537,7 +537,6 @@ body {
 
 .panel__info ul .info__items.drop__active {
   margin-left: 40px;
-  transition: all 0.8s ease;
 }
 
 .panel__info ul li>.text__container .drop_arrow {
@@ -559,35 +558,39 @@ body {
 
 .panel__info ul li .inner_list {
   display: grid;
-  grid-template-columns: repeat(2, minmax(140px, 340px));
-  max-width: 600px;
+  grid-template-columns: repeat(2, minmax(140px, 400px));
+  grid-template-rows: auto;
+  max-width: 800px;
   overflow: hidden;
   padding: 0px;
-  margin: 30px 0px 15px 60px;
+  margin: 15px 0px 30px 46px;
   list-style: none;
-  height: 0;
-  transition: height 0.5s ease;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.8s ease, opacity 0.5s ease-in;
 }
 
 .panel__info ul li.drop__active .inner_list {
-  height: 200px;
-  margin: 30px 0px 15px 60px;
+  max-height: 600px;
+  margin: 15px 0px 30px 46px;
+  opacity: 1;
 }
 
 .panel__info ul li .inner_list .inner_list__items {
-  align-self: center;
+  /* align-self: center; */
   position: relative;
-  margin-bottom: 10px;
-  padding-left: 20px;
+  padding: 10px;
   font-family: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', 'Lucida Console', Monaco, monospace;
   font-size: 13px;
   line-height: 20px;
-  height: 0;
-  transition: all 1.5s ease;
+  max-height: 0;
+  transition: max-height 1.5s ease;
 }
 
 .panel__info ul li.drop__active .inner_list .inner_list__items {
-  height: 40px;
+  display: block;
+  max-height: 300px;
+  padding: 10px;
 }
 
 /* ===== WORK =====*/
