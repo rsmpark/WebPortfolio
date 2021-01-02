@@ -164,7 +164,7 @@ var stopAnimation = function () {
   setTimeout(function () {
     // Set the animation state to false
     isAnimating = false;
-  }, 300);
+  }, 500);
 };
 
 // Function returns true if DOM element bottom is reached
@@ -188,7 +188,6 @@ document.addEventListener(
   function (event) {
     // If animation is in progress
     if (isAnimating) {
-      // console.log('scrolling');
       event.preventDefault();
       return;
     }
@@ -218,10 +217,16 @@ document.addEventListener(
     } else {
       event.preventDefault();
 
-      if (direction < 0) $currPanel.scrollTop($currPanel.scrollTop() - 15);
-      else if (direction > 0) $currPanel.scrollTop($currPanel.scrollTop() + 15);
+      if (direction < 0)
+        $currPanel
+          .find('.panel__info')
+          .scrollTop($currPanel.find('.panel__info').scrollTop() - 15);
+      else if (direction > 0)
+        $currPanel
+          .find('.panel__info')
+          .scrollTop($currPanel.find('.panel__info').scrollTop() + 15);
 
-      if (!$currPanel.isYScrollable()) {
+      if (!$currPanel.find('.panel__info').isYScrollable()) {
         if (direction > 0) {
           // If next index is greater than sections count, do nothing
           if (currentIndex + 1 >= $sections.length) return;
@@ -240,8 +245,9 @@ document.addEventListener(
         }
       } else {
         if (
-          $currPanel.scrollTop() + $currPanel.innerHeight() >=
-          $currPanel[0].scrollHeight
+          $currPanel.find('.panel__info').scrollTop() +
+            $currPanel.find('.panel__info').innerHeight() >=
+          $currPanel.find('.panel__info')[0].scrollHeight
         ) {
           if (isPanelBottom) {
             goToNextSection(event);
@@ -249,16 +255,16 @@ document.addEventListener(
           } else {
             setTimeout(function () {
               isPanelBottom = true;
-            }, 400);
+            }, 500);
           }
-        } else if ($currPanel.scrollTop() === 0) {
+        } else if ($currPanel.find('.panel__info').scrollTop() === 0) {
           if (isPanelTop) {
             goToPrevSection(event);
             isPanelTop = false;
           } else {
             setTimeout(function () {
               isPanelTop = true;
-            }, 400);
+            }, 500);
           }
         }
       }
@@ -268,31 +274,35 @@ document.addEventListener(
 );
 
 function goToPrevSection(event) {
+  // Prevent the default mouse wheel behaviour
+  event.preventDefault();
+  // Set the animation state to true
+  isAnimating = true;
+
   currentIndex--;
   // Get the previous section
   var $previousSection = $($sections[currentIndex]);
   // Get the previous section offset
   var offsetTop = $previousSection.offset().top;
+
+  // Animate scroll
+  $('html, body').animate({ scrollTop: offsetTop }, 250, stopAnimation);
+}
+
+function goToNextSection(event) {
   // Prevent the default mouse wheel behaviour
   event.preventDefault();
   // Set the animation state to true
   isAnimating = true;
-  // Animate scroll
-  $('html, body').animate({ scrollTop: offsetTop }, 150, stopAnimation);
-}
 
-function goToNextSection(event) {
   currentIndex++;
   // Get the next section
   var $nextSection = $($sections[currentIndex]);
   // Get the next section offset
   var offsetTop = $nextSection.offset().top;
-  // Prevent the default mouse wheel behaviour
-  event.preventDefault();
-  // Set the animation state to true
-  isAnimating = true;
+
   // Animate scroll
-  $('html, body').animate({ scrollTop: offsetTop }, 150, stopAnimation);
+  $('html, body').animate({ scrollTop: offsetTop }, 250, stopAnimation);
 }
 
 $.fn.isYScrollable = function () {
