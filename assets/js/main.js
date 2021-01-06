@@ -149,7 +149,7 @@ $('.panel__info .text__container').on('click', function () {
 var $sections = $('.section');
 
 // Variable to hold the current section index
-var currentIndex = 0;
+var currentIndex = 3;
 
 // Variable to hold the animation state
 var isAnimating = false;
@@ -308,3 +308,44 @@ function goToNextSection(event) {
 $.fn.isYScrollable = function () {
   return this[0].scrollHeight > this[0].clientHeight;
 };
+
+/* Carousel Logic */
+
+const $carouselTrack = $('.carousel .carousel__track');
+const $carouselSlides = $carouselTrack.children();
+const $carouselNext = $carouselTrack
+  .parent()
+  .next('.carousel__actions')
+  .children('#carousel__button--next');
+const $carouselPrev = $carouselTrack
+  .parent()
+  .next('.carousel__actions')
+  .children('#carousel__button--prev');
+
+const slideWidth = $carouselSlides[0].getBoundingClientRect().width;
+
+$carouselSlides.each((index, slide) => {
+  slide.style.left = slideWidth * index + 'px';
+});
+
+const moveToSlide = (carouselTrack, currSlide, targetSlide, slideAmount) => {
+  carouselTrack.css('transform', `translateX(-${slideAmount})`);
+  currSlide.removeClass('current-slide');
+  targetSlide.addClass('current-slide');
+};
+
+$carouselPrev.on('click', (event) => {
+  const $currSlide = $carouselTrack.children('.current-slide');
+  const $prevSlide = $currSlide.prev();
+  const slideAmount = $prevSlide[0].style.left;
+
+  moveToSlide($carouselTrack, $currSlide, $prevSlide, slideAmount);
+});
+
+$carouselNext.on('click', (event) => {
+  const $currSlide = $carouselTrack.children('.current-slide');
+  const $nextSlide = $currSlide.next();
+  const slideAmount = $nextSlide[0].style.left;
+
+  moveToSlide($carouselTrack, $currSlide, $nextSlide, slideAmount);
+});
