@@ -621,14 +621,23 @@ body {
 
 /* ===== WORK =====*/
 
+/* section.work.section {
+
+} */
+
 .work__container {
-  width: 100%;
   position: relative;
+  height: 480px;
 }
 
 .work__container .carousel {
-  /* position: relative; */
+  width: 1200px;
   overflow: hidden;
+  margin: 0 auto;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  height: 480px;
 }
 
 .carousel .carousel__track {
@@ -636,26 +645,28 @@ body {
   height: 470px;
   position: relative;
   transition: transform 250ms ease-in;
+  display: inline-block;
 }
 
 .carousel .carousel__track .bd-grid {
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  column-gap: 30px;
-  row-gap: 30px;
+  column-gap: 60px;
   width: 100%;
+  max-width: 1100px;
   position: absolute;
   height: 100%;
+  align-items: center;
 }
 
 .carousel__actions {
   position: absolute;
   display: flex;
-  width: 115%;
+  width: 130%;
   margin: 0 auto;
   justify-content: space-between;
   top: 50%;
   left: 50%;
+  z-index: 100;
   transform: translateY(-50%) translateX(-50%);
 }
 
@@ -672,11 +683,10 @@ body {
 .project {
   position: relative;
   color: white;
-  height: calc((470 - 30) / 2);
+  height: 280px
 }
 
 .project .work__img {
-  border-radius: 5px;
   box-shadow: 4px 4px 25px rgba(7, 8, 8, 0.4);
   overflow: hidden;
   width: 100%;
@@ -689,43 +699,62 @@ body {
   object-fit: cover;
   transition: 0.8s;
   cursor: pointer;
+  -webkit-filter: contrast(120%) grayscale(50%);
+  filter: contrast(100%) grayscale(50%);
+  transition: all .3s linear;
 }
 
 .project:hover .work__img img {
-  transform: scale(1.1);
+  filter: none
 }
 
 .project .overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 100%;
-  opacity: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  transition: opacity 0.8s ease;
+  height: 280px;
+  top: 0;
+  position: absolute;
+  background-color: rgb(0, 0, 0, 0.3);
+  opacity: 1;
+  z-index: 1000;
+  transition: all .3s linear;
 }
 
 .project:hover .overlay {
+  opacity: 0
+}
+
+.project .project-info-card {
+  position: absolute;
+  top: 100px;
+  left: 130px;
+  width: 75%;
+  height: 80%;
+  opacity: 1;
+  background-color: rgb(40, 40, 40);
+  transition: opacity 0.8s ease;
+  z-index: 50000;
+}
+
+.project:hover .project-info-card {
   opacity: 1;
 }
 
-.project .overlay .project__desc {
+.project .project-info-card .project__desc {
   padding: 20px 16px;
 }
 
-.project .overlay .project__desc h4 {
+.project .project-info-card .project__desc h4 {
   font-size: 14.5px;
   margin: 0;
 }
 
-.project .overlay .project__desc span {
+.project .project-info-card .project__desc span {
   display: inline-block;
   margin: 0 0 10px 0;
   font-size: 11px;
 }
 
-.project .overlay .project__desc p {
+.project .project-info-card .project__desc p {
   font-size: 14px;
 }
 

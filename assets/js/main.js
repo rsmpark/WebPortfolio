@@ -325,7 +325,13 @@ const $carouselPrev = $carouselTrack
 const slideWidth = $carouselSlides[0].getBoundingClientRect().width;
 
 $carouselSlides.each((index, slide) => {
-  slide.style.left = slideWidth * index + 'px';
+  padding = 0;
+  if (index != 0) {
+    padding = 130 * index;
+  } else {
+    padding = 20;
+  }
+  slide.style.left = slideWidth * index + padding + 'px';
 });
 
 const moveToSlide = (carouselTrack, currSlide, targetSlide, slideAmount) => {
