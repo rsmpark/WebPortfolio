@@ -115,8 +115,18 @@ var $currPanel = $expPanels.eq(panelIndex);
 
 $expItems.on('click', function () {
   panelIndex = $($expItems).index(this);
+
+  $('.experience__item.active').removeClass('active');
+  $(this).addClass('active');
+
   $expPanels.addClass('hidden');
+  $expPanels.addClass('visually-hidden');
   $expPanels.eq(panelIndex).removeClass('hidden');
+
+  setTimeout(function () {
+    $expPanels.eq(panelIndex).removeClass('visually-hidden');
+  }, 20);
+
   $currPanel = $expPanels.eq(panelIndex);
 });
 
@@ -308,6 +318,44 @@ function goToNextSection(event) {
 $.fn.isYScrollable = function () {
   return this[0].scrollHeight > this[0].clientHeight;
 };
+
+/* Experience Nav Tab Logic */
+$('.experience__lst:has(.experience__lst-underline)').each(
+  function initialize() {
+    const $container = $(this);
+    const $active = $container.find('li.active').first();
+    const $underline = $container.find('.experience__lst-underline');
+
+    const top = $active.position().top;
+    const height = $active.outerHeight();
+
+    $underline.css({ top, height });
+  }
+);
+
+$('.experience__lst:has(.experience__lst-underline) > li > button')
+  .on('mouseenter focus', function () {
+    const $this = $(this);
+    const $parent = $this.parent();
+    const $container = $parent.closest('.experience__lst');
+    const $underline = $container.find('.experience__lst-underline');
+
+    const top = $parent.position().top;
+    const height = $parent.outerHeight();
+
+    $underline.css({ top, height });
+  })
+  .on('mouseleave blur', function () {
+    const $this = $(this);
+    const $container = $this.closest('.experience__lst');
+    const $active = $container.find('li.active').first();
+    const $underline = $container.find('.experience__lst-underline');
+
+    const top = $active.position().top;
+    const height = $active.outerHeight();
+
+    $underline.css({ top, height });
+  });
 
 /* Carousel Logic */
 
