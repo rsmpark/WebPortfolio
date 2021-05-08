@@ -375,9 +375,7 @@ const slideWidth = $carouselSlides[0].getBoundingClientRect().width;
 $carouselSlides.each((index, slide) => {
   padding = 0;
   if (index != 0) {
-    padding = 130 * index;
-  } else {
-    padding = 20;
+    padding = 277 * index;
   }
   slide.style.left = slideWidth * index + padding + 'px';
 });
