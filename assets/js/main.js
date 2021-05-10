@@ -110,7 +110,7 @@ navLink.forEach((n) => n.addEventListener('click', linkAction));
 /* Experiences */
 let $expItems = $('.experience__item');
 let $expPanels = $('.experience__panel');
-var panelIndex = 1;
+var panelIndex = 0;
 var $currPanel = $expPanels.eq(panelIndex);
 
 $expItems.on('click', function () {
@@ -133,19 +133,19 @@ $expItems.on('click', function () {
 $('.panel__info .text__container').on('click', function () {
   let idx = $(this).parent().index();
 
-  console.log(idx);
+  const isDropActive = !$currPanel
+    .find('.panel__info ul li.info__items')
+    .eq(idx)
+    .hasClass('drop__active');
 
-  if (
-    !$currPanel
-      .find('.panel__info ul li.info__items')
-      .eq(idx)
-      .hasClass('drop__active')
-  ) {
+  if (isDropActive) {
+    console.log('ASDASD');
     $currPanel
       .find('.panel__info ul li.info__items')
       .eq(idx)
       .addClass('drop__active');
   } else {
+    console.log('BNMBNM');
     $currPanel
       .find('.panel__info ul li.info__items')
       .eq(idx)

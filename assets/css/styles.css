@@ -672,7 +672,7 @@ header .active::after {
 .carousel .carousel__track .bd-grid {
   grid-template-columns: repeat(3, 375px);
   max-width: none;
-  grid-column-gap: 50px;
+  grid-column-gap: 55px;
   width: 100%;
   position: absolute;
   height: 80%;
@@ -711,7 +711,7 @@ header .active::after {
 
 .project .work__img {
   overflow: hidden;
-  width: 100%;
+  width: 90%;
   height: 100%;
 }
 
@@ -731,7 +731,7 @@ header .active::after {
 }
 
 .project .overlay {
-  width: 100%;
+  width: 90%;
   height: 280px;
   top: 0;
   position: absolute;
@@ -749,7 +749,7 @@ header .active::after {
   position: absolute;
   top: 100px;
   left: 130px;
-  width: 75%;
+  width: 70%;
   height: 80%;
   opacity: 1;
   background-color: rgb(40, 40, 40);
@@ -763,22 +763,29 @@ header .active::after {
 }
 
 .project .project-info-card .project__desc {
-  padding: 20px 16px;
+  padding: 23px;
+  height: 100%;
 }
 
 .project .project-info-card .project__desc h4 {
-  font-size: 14.5px;
-  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  margin: 4px 0 15px 0;
+  letter-spacing: 1px;
 }
 
-.project .project-info-card .project__desc span {
-  display: inline-block;
-  margin: 0 0 10px 0;
-  font-size: 11px;
+.project .project-info-card .project__desc h5 {
+  margin: 0;
+  font-size: 12.5px;
+  font-family: var(--code-font);
+  font-weight: 100;
 }
 
 .project .project-info-card .project__desc p {
-  font-size: 14px;
+  font-family: var(--code-font);
+  font-weight: 100;
+  font-size: 10px;
+  line-height: 20px;
 }
 
 .project-secondary-info {
@@ -788,7 +795,7 @@ header .active::after {
 }
 
 .project .links {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .project .links a {
@@ -805,8 +812,9 @@ header .active::after {
 
 .project .tech-desc {
   display: inline-block;
+  letter-spacing: 1.2px;
   font-family: var(--code-font);
-  font-size: 12.5px;
+  font-size: 11px;
   font-weight: 100;
   margin-left: 2px;
   margin-right: 19px;
