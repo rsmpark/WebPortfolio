@@ -300,6 +300,13 @@ header .active::after {
 
 /*BUTTONS*/
 
+button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
 .button {
   display: inline-block;
   background-color: var(--first-color);
@@ -847,6 +854,10 @@ header .active::after {
 .contact__form {
   margin: 0 auto;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .contact__form .form-row {
@@ -899,13 +910,92 @@ header .active::after {
   height: 4.2rem;
 }
 
-.contact__button {
-  display: block;
-  border: none;
-  outline: none;
-  font-size: var(--normal-font-size);
-  cursor: pointer;
-  margin-left: auto;
+.submit-button {
+  margin-top: 5.2em;
+  min-width: 17em;
+  position: relative;
+  font-weight: bold;
+  -webkit-text-transform: uppercase;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.9em;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-flexbox;
+  display: inline-flex;
+  overflow: hidden;
+  background: transparent;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.submit-button .submit-button__content {
+  z-index: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 1.25em 3em;
+  width: 100%;
+  color: #fff;
+  border: 1px solid currentColor;
+  min-height: 4.5em;
+  letter-spacing: 0.1em;
+}
+
+.submit-button:hover .submit-button__content {
+  color: #575757;
+  border-color: #cecece;
+}
+
+.submit-button .submit-button__content:before {
+  content: '';
+  width: 101%;
+  height: 108%;
+  pointer-events: none;
+  z-index: -1;
+  position: absolute;
+  top: -0.1em;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: currentColor;
+  -webkit-transform: translateX(-100%);
+  -ms-transform: translateX(-100%);
+  transform: translateX(-100%);
+  -webkit-transition: -webkit-transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  -webkit-transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.submit-button:hover .submit-button__content:before {
+  -webkit-transform: translateX(0);
+  -ms-transform: translateX(0);
+  transform: translateX(0);
+  background: #fff;
+}
+
+.submit-button .submit-button__content .bow-arrow {
+  width: 3em;
+  height: 1.7em;
+  margin-left: 1.25em;
+}
+
+.submit-button:hover .submit-button__content .bow-arrow path {
+  stroke: #575757;
 }
 
 /* ===== FOOTER =====*/
