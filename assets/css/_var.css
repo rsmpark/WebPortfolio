@@ -1,1 +1,56 @@
+/*===== VARIABLES CSS =====*/
 
+:root {
+  --header-height: 3rem;
+  --font-semi: 600;
+}
+
+/*===== Colours =====*/
+
+:root {
+  --first-color: #fbfbfb;
+  --second-color: #ef8354;
+  --third-color: #c9c9c9;
+  --fourth-color: #b8c2d0;
+  --fifth-color: #4f5d75;
+  --bg-color: #12131a;
+  --first-font: #fff;
+}
+
+/*===== Font =====*/
+
+:root {
+  --body-font: Calibre, 'San Francisco', 'SF Pro Text', -apple-system, system-ui, BlinkMacSystemFont, Roboto, 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
+  --code-font: 'Roboto Mono', 'SF Mono', 'Fira Code', 'Fira Mono', 'Lucida Console', Monaco, monospace;
+  --big-font-size: 3rem;
+  --h2_font_size: 2rem;
+  --normal-font-size: 0.938rem;
+}
+
+@media screen and (min-width: 768px) {
+  :root {
+    --big-font-size: 3.5rem;
+    --h2-font-size: 2.3rem;
+    --normal-font-size: 1rem;
+  }
+}
+
+/*===== Margins =====*/
+
+:root {
+  --mb-1: 0.5rem;
+  --mb-2: 1rem;
+  --mb-3: 1.5rem;
+  --mb-4: 2rem;
+  --mb-5: 2.5rem;
+  --mb-6: 3rem;
+}
+
+/*===== z index =====*/
+
+:root {
+  --z-back: -10;
+  --z-normal: 1;
+  --z-tooltip: 10;
+  --z-fixed: 100;
+}
