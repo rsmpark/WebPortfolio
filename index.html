@@ -583,7 +583,7 @@
                                            class="home__navigate-icon"><i class='bx bx-link-external'></i></a>
                                     </div>
                                     <div>
-                                        <span class="tech-desc">Spring Boot</span>
+                                        <span class="tech-desc">Spring</span>
                                         <span class="tech-desc">Thymeleaf</span>
                                         <span class="tech-desc">MySQL</span>
                                         <span class="tech-desc">NGINX</span>
@@ -613,7 +613,7 @@
                                            class="home__navigate-icon"><i class='bx bx-link-external'></i></a>
                                     </div>
                                     <div>
-                                        <span class="tech-desc">Spring Boot</span>
+                                        <span class="tech-desc">Spring</span>
                                         <span class="tech-desc">JQuery</span>
                                         <span class="tech-desc">MSSQL</span>
                                     </div>
@@ -642,7 +642,7 @@
                                            class="home__navigate-icon"><i class='bx bx-link-external'></i></a>
                                     </div>
                                     <div>
-                                        <span class="tech-desc">Spring Boot</span>
+                                        <span class="tech-desc">Spring</span>
                                         <span class="tech-desc">Vue</span>
                                         <span class="tech-desc">MariaDB</span>
                                         <span class="tech-desc">REDIS</span>
@@ -674,7 +674,7 @@
                                            class="home__navigate-icon"><i class='bx bx-link-external'></i></a>
                                     </div>
                                     <div>
-                                        <span class="tech-desc">Spring Boot</span>
+                                        <span class="tech-desc">Spring</span>
                                         <span class="tech-desc">JQuery</span>
                                         <span class="tech-desc">Figma</span>
                                         <span class="tech-desc">MSSQL</span>
@@ -704,7 +704,7 @@
                                            class="home__navigate-icon"><i class='bx bx-link-external'></i></a>
                                     </div>
                                     <div>
-                                        <span class="tech-desc">Spring Boot</span>
+                                        <span class="tech-desc">Spring</span>
                                         <span class="tech-desc">Docker</span>
                                         <span class="tech-desc">MariaDB</span>
                                     </div>
@@ -733,7 +733,7 @@
                                            class="home__navigate-icon"><i class='bx bx-link-external'></i></a>
                                     </div>
                                     <div>
-                                        <span class="tech-desc">Spring Boot</span>
+                                        <span class="tech-desc">Spring</span>
                                         <span class="tech-desc">Vue</span>
                                         <span class="tech-desc">MariaDB</span>
                                     </div>
@@ -795,7 +795,7 @@
                                     </div>
                                     <div>
                                         <span class="tech-desc">Electron</span>
-                                        <span class="tech-desc">Spring Boot</span>
+                                        <span class="tech-desc">Spring</span>
                                         <span class="tech-desc">Blockchain</span>
                                         <span class="tech-desc">MySQL</span>
                                     </div>
@@ -912,25 +912,47 @@
         <!--===== CONTACT =====-->
         <section class="contact section"
                  id="contact">
-            <h2 class="section-title">Contact</h2>
+            <div class="heading">
+                <h2 class="section-title">Get In Touch</h2>
+                <h3>Send me a message and I will try my best to get back to you!</h4>
+            </div>
 
-            <div class="contact__container bd-grid">
+            <div class="contact__container">
                 <form action=""
                       class="contact__form">
-                    <input type="text"
-                           placeholder="Name"
-                           class="contact__input">
-                    <input type="mail"
-                           placeholder="Email"
-                           class="contact__input">
-                    <textarea name=""
-                              id=""
-                              cols="0"
-                              rows="10"
-                              class="contact__input"></textarea>
-                    <input type="button"
-                           value="Enviar"
-                           class="contact__button button">
+                    <div class="form-row">
+                        <div class="form-row__full-name input-group">
+                            <label for="full-name">Your Name</label>
+                            <input type="text"
+                                   id="full-name"
+                                   name="name"
+                                   required="required"
+                                   placeholder="Enter your name"
+                                   class="contact__input">
+                        </div>
+                        <div class="form-row__email input-group">
+                            <label for="email">Email Address</label>
+                            <input id="email"
+                                   name="replyto"
+                                   required="required"
+                                   type="mail"
+                                   placeholder="Enter your email address"
+                                   class="contact__input">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-row__email input-group">
+                            <label for="message">Your Message</label>
+                            <textarea name=""
+                                      id=""
+                                      rows="7"
+                                      minlength="30"
+                                      class="contact__input"></textarea>
+                            <input type="button"
+                                   value="Enviar"
+                                   class="contact__button button">
+                        </div>
+                    </div>
                 </form>
             </div>
         </section>

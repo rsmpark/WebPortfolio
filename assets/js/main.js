@@ -140,16 +140,10 @@ $('.panel__info .text__container').on('click', function () {
 
   if (isDropActive) {
     console.log('ASDASD');
-    $currPanel
-      .find('.panel__info ul li.info__items')
-      .eq(idx)
-      .addClass('drop__active');
+    $currPanel.find('.panel__info ul li.info__items').eq(idx).addClass('drop__active');
   } else {
     console.log('BNMBNM');
-    $currPanel
-      .find('.panel__info ul li.info__items')
-      .eq(idx)
-      .removeClass('drop__active');
+    $currPanel.find('.panel__info ul li.info__items').eq(idx).removeClass('drop__active');
   }
 });
 
@@ -320,18 +314,16 @@ $.fn.isYScrollable = function () {
 };
 
 /* Experience Nav Tab Logic */
-$('.experience__lst:has(.experience__lst-underline)').each(
-  function initialize() {
-    const $container = $(this);
-    const $active = $container.find('li.active').first();
-    const $underline = $container.find('.experience__lst-underline');
+$('.experience__lst:has(.experience__lst-underline)').each(function initialize() {
+  const $container = $(this);
+  const $active = $container.find('li.active').first();
+  const $underline = $container.find('.experience__lst-underline');
 
-    const top = $active.position().top;
-    const height = $active.outerHeight();
+  const top = $active.position().top;
+  const height = $active.outerHeight();
 
-    $underline.css({ top, height });
-  }
-);
+  $underline.css({ top, height });
+});
 
 $('.experience__lst:has(.experience__lst-underline) > li > button')
   .on('mouseenter focus', function () {
@@ -373,10 +365,8 @@ const $carouselPrev = $carouselTrack
 const slideWidth = $carouselSlides[0].getBoundingClientRect().width;
 
 $carouselSlides.each((index, slide) => {
-  padding = 0;
-  if (index != 0) {
-    padding = 277 * index;
-  }
+  padding = 10;
+
   slide.style.left = slideWidth * index + padding + 'px';
 });
 

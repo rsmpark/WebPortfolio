@@ -16,6 +16,7 @@
 :root {
   --first-color: #c3c3c3;
   --second-color: #fbfbfb;
+  --third-color: #575757;
   --bg-color: rgb(30, 30, 30);
   --first-font: #fff;
 }
@@ -70,21 +71,20 @@ body {
   color: var(--first-color);
   margin-top: var(--mb-2);
   margin-bottom: var(--mb-4);
-  /* text-align: center; */
 }
 
 .section-title::after {
   position: absolute;
   content: '';
-  width: 14px;
-  height: 0.09rem;
+  width: 320px;
+  height: 1.5px;
   margin: auto;
   top: 2rem;
-  background-color: var(--first-color);
+  background-color: var(--third-color);
 }
 
 .about .section-title::after {
-  left: 5.5em;
+  left: 5.3em;
 }
 
 .skills .section-title::after {
@@ -92,11 +92,15 @@ body {
 }
 
 .experience .section-title::after {
-  left: 6.2em;
+  left: 6.1em;
 }
 
 .work .section-title::after {
-  left: 3em;
+  left: 3.6em;
+}
+
+.contact .section-title::after {
+  left: 6.4em;
 }
 
 .section {
@@ -346,7 +350,7 @@ header .active::after {
 }
 
 .about__img img {
-  width: 200px;
+  width: 350px;
 }
 
 .about__info {
@@ -648,7 +652,8 @@ header .active::after {
 .work__container {
   position: relative;
   height: 480px;
-  width: 1300px;
+  width: 1200px;
+  margin: 0 auto;
 }
 
 .work__container .carousel {
@@ -670,22 +675,23 @@ header .active::after {
 }
 
 .carousel .carousel__track .bd-grid {
-  grid-template-columns: repeat(3, 375px);
+  grid-template-columns: repeat(3, 355px);
   max-width: none;
   grid-column-gap: 55px;
   width: 100%;
   position: absolute;
   height: 80%;
-  align-items: flex-end;
+  align-items: center;
+  margin: 0 auto;
 }
 
 .carousel__actions {
   position: absolute;
   display: flex;
-  width: 130%;
+  width: 120%;
   margin: 0 auto;
   justify-content: space-between;
-  top: 50%;
+  top: 45%;
   left: 50%;
   z-index: 100;
   transform: translateY(-50%) translateX(-50%);
@@ -704,7 +710,7 @@ header .active::after {
 .project {
   position: relative;
   color: white;
-  width: 375px;
+  width: 355px;
   height: 280px;
   box-shadow: 10px 10px 25px -20px rgba(0, 0, 0, 0.3);
 }
@@ -747,10 +753,10 @@ header .active::after {
 
 .project .project-info-card {
   position: absolute;
-  top: 100px;
-  left: 130px;
-  width: 70%;
-  height: 80%;
+  top: 110px;
+  left: 140px;
+  width: 67%;
+  height: 75%;
   opacity: 1;
   background-color: rgb(40, 40, 40);
   box-shadow: -20px 20px 30px -5px rgba(0, 0, 0, 0.3);
@@ -763,12 +769,12 @@ header .active::after {
 }
 
 .project .project-info-card .project__desc {
-  padding: 23px;
+  padding: 20px;
   height: 100%;
 }
 
 .project .project-info-card .project__desc h4 {
-  font-size: 17px;
+  font-size: 14px;
   font-weight: 700;
   margin: 4px 0 15px 0;
   letter-spacing: 1px;
@@ -776,7 +782,7 @@ header .active::after {
 
 .project .project-info-card .project__desc h5 {
   margin: 0;
-  font-size: 12.5px;
+  font-size: 11.5px;
   font-family: var(--code-font);
   font-weight: 100;
 }
@@ -822,15 +828,75 @@ header .active::after {
 
 /* ===== CONTACT =====*/
 
+.contact.section {
+  max-width: 900px;
+}
+
+.contact.section .heading {
+  margin-bottom: 6rem;
+}
+
+.contact.section .heading h2, .contact.section .heading h4 {
+  margin: 0;
+}
+
+.contact__container {
+  width: 100%;
+}
+
+.contact__form {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.contact__form .form-row {
+  display: flex;
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+
+.contact__form .form-row:not(:last-of-type) {
+  margin-bottom: 3rem;
+}
+
+.contact__form .form-row:first-of-type .input-group {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact__form .form-row label {
+  margin-bottom: 10px;
+  font-size: var(--normal-font-size);
+  font-weight: var(--font-semi);
+}
+
 .contact__input {
   width: 100%;
   font-size: var(--normal-font-size);
-  font-weight: var(--font-semi);
-  padding: 1rem;
-  border-radius: 0.5rem;
-  border: 1.5px solid var(--second-color);
-  outline: none;
   margin-bottom: var(--mb-4);
+  background-color: transparent;
+  border-color: var(--first-color);
+  line-height: 1.5;
+  border: 0;
+  border-bottom: 1px solid var(--first-color);
+  color: var(--first-color);
+  padding: 0.6em;
+  padding-left: 0;
+}
+
+.form-row .form-row__email {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-row .form-row__email textarea {
+  font-weight: 200;
+  border-color: var(--first-color);
+  height: 4.2rem;
 }
 
 .contact__button {
@@ -878,10 +944,10 @@ header .active::after {
     padding-bottom: 3rem;
   }
   .section-title {
-    margin-bottom: var(--mb-6);
+    margin-bottom: var(--mb-5);
   }
   .section-title::after {
-    width: 280px;
+    width: 320px;
     top: 1.5rem;
   }
   .nav {
@@ -929,18 +995,6 @@ header .active::after {
     text-align: initial;
     margin: 0 auto;
   }
-}
-
-.about__img img {
-  width: 400px;
-}
-
-.contact__form {
-  width: 360px;
-}
-
-.contact__container {
-  justify-items: center;
 }
 
 @media screen and (min-width: 1024px) {
