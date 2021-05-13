@@ -313,6 +313,14 @@ $.fn.isYScrollable = function () {
   return this[0].scrollHeight > this[0].clientHeight;
 };
 
+/* Nav Scroll */
+
+$('.nav__item').on('click', function () {
+  const href = $(this).find('a').attr('href');
+  currentIndex = $(this).index();
+  $(href)[0].scrollIntoView();
+});
+
 /* Nav Tab Underline Animation */
 $('.nav__list:has(.nav__item-underline)').each(function initialize() {
   const $container = $(this);
