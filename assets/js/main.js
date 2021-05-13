@@ -153,7 +153,7 @@ $('.panel__info .text__container').on('click', function () {
 var $sections = $('.section');
 
 // Variable to hold the current section index
-var currentIndex = 3;
+var currentIndex = 0;
 
 // Variable to hold the animation state
 var isAnimating = false;
@@ -313,7 +313,46 @@ $.fn.isYScrollable = function () {
   return this[0].scrollHeight > this[0].clientHeight;
 };
 
-/* Experience Nav Tab Logic */
+/* Nav Tab Underline Animation */
+$('.nav__list:has(.nav__item-underline)').each(function initialize() {
+  const $container = $(this);
+  const $active = $container.find('li a.active').first();
+  const $underline = $container.find('.nav__item-underline');
+
+  const left = $active.position().left;
+  const width = $active.outerWidth();
+
+  $underline.css({ left, width });
+});
+
+const initialMargin = $('.nav__list .nav__item-underline').position().left;
+
+$('.nav__list:has(.nav__item-underline) > li > a')
+  .on('mouseenter focus', function () {
+    const $this = $(this);
+    const $parent = $this.parent();
+    const $container = $parent.closest('.nav__list');
+    const $nav_item = $parent.closest('.nav__item');
+    const $underline = $container.find('.nav__item-underline');
+
+    const left = $nav_item.position().left + initialMargin;
+    const width = $nav_item.outerWidth();
+
+    $underline.css({ left, width });
+  })
+  .on('mouseleave blur', function () {
+    const $this = $(this);
+    const $container = $this.closest('.nav__list');
+    const $active = $container.find('li a.active').first();
+    const $underline = $container.find('.nav__item-underline');
+
+    const left = $active.position().left;
+    const width = $active.outerWidth();
+
+    $underline.css({ left, width });
+  });
+
+/* Experience Tab Underline Animation */
 $('.experience__lst:has(.experience__lst-underline)').each(function initialize() {
   const $container = $(this);
   const $active = $container.find('li.active').first();
