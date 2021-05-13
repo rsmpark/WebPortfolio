@@ -8,11 +8,11 @@
 /*===== Colours =====*/
 
 :root {
-  --first-color: #fbfbfb;
+  --first-color: #eeeef2;
   --second-color: #ef8354;
-  --third-color: #c9c9c9;
-  --fourth-color: #b8c2d0;
-  --fifth-color: #4f5d75;
+  --third-color: #afb2bd;
+  --fourth-color: #c3c9d1;
+  --fifth-color: #44434d;
   --bg-color: #12131a;
   --first-font: #fff;
 }
