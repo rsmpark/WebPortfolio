@@ -89,7 +89,7 @@ h2 {
   z-index: var(--z-fixed);
   background-color: var(--bg-color);
   transition: all 0.3s ease;
-  padding: 0 70px;
+  padding: 0 80px;
 }
 
 .l-header.hide {
@@ -223,7 +223,7 @@ h2 {
   display: flex;
   flex-direction: column;
   position: fixed;
-  left: 37px;
+  left: 80px;
   bottom: 1px;
 }
 
@@ -881,7 +881,7 @@ button {
 }
 
 .contact.section .heading {
-  margin-bottom: 6rem;
+  margin-bottom: 4rem;
   letter-spacing: 0.8px;
   text-align: center;
 }
@@ -894,7 +894,7 @@ button {
 }
 
 .contact .section-title {
-  margin-bottom: 20px;
+  margin: 160px 0 40px;
 }
 
 .contact .section-title::after {
@@ -904,70 +904,13 @@ button {
 
 .contact__container {
   width: 100%;
-}
-
-.contact__form {
-  margin: 0 auto;
-  width: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.contact__form .form-row {
-  display: flex;
-  position: relative;
-  width: 100%;
-  margin: 0 auto;
-  justify-content: space-between;
-}
-
-.contact__form .form-row:not(:last-of-type) {
-  margin-bottom: 3rem;
-}
-
-.contact__form .form-row:first-of-type .input-group {
-  width: 45%;
-  display: flex;
-  flex-direction: column;
-}
-
-.contact__form .form-row label {
-  margin-bottom: 10px;
-  font-size: 16px;
-  font-weight: var(--font-semi);
-}
-
-.contact__input {
-  width: 100%;
-  font-size: 14px;
-  font-family: var(--code-font);
-  margin-bottom: var(--mb-4);
-  background-color: transparent;
-  line-height: 1.5;
-  border: 0;
-  border-bottom: 1px solid var(--first-color);
-  color: var(--second-color);
-  padding: 0.6em;
-  padding-left: 0;
-}
-
-.form-row .form-row__email {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.form-row .form-row__email textarea {
-  font-weight: 200;
-  border-color: var(--first-color);
-  height: 3.2rem;
-}
-
 .submit-button {
-  margin-top: 4em;
-  min-width: 15em;
+  min-width: 18em;
   position: relative;
   font-weight: bold;
   -webkit-text-transform: uppercase;
@@ -1005,7 +948,7 @@ button {
   width: 100%;
   color: #fff;
   border: 1px solid currentColor;
-  min-height: 4.5em;
+  min-height: 4.7em;
   letter-spacing: 0.1em;
   font-size: 14px;
 }
