@@ -282,8 +282,6 @@ function goToPrevSection(event) {
   isAnimating = true;
 
   currentIndex--;
-  // Get the previous section
-  var $previousSection = $($sections[currentIndex]);
 
   // Animate scroll
   const href = $('.nav__item').eq(currentIndex).find('a').attr('href');
@@ -303,8 +301,6 @@ function goToNextSection(event) {
   isAnimating = true;
 
   currentIndex++;
-  // Get the next section
-  var $nextSection = $($sections[currentIndex]);
 
   // Animate scroll
   const href = $('.nav__item').eq(currentIndex).find('a').attr('href');
