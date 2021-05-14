@@ -139,10 +139,8 @@ $('.panel__info .text__container').on('click', function () {
     .hasClass('drop__active');
 
   if (isDropActive) {
-    console.log('ASDASD');
     $currPanel.find('.panel__info ul li.info__items').eq(idx).addClass('drop__active');
   } else {
-    console.log('BNMBNM');
     $currPanel.find('.panel__info ul li.info__items').eq(idx).removeClass('drop__active');
   }
 });
@@ -190,9 +188,9 @@ let isPanelTop = false;
 document.addEventListener(
   'wheel',
   function (event) {
+    event.preventDefault();
     // If animation is in progress
     if (isAnimating) {
-      event.preventDefault();
       return;
     }
 
@@ -202,6 +200,7 @@ document.addEventListener(
     // Get the mouse wheel spin direction
     var direction = event.deltaY;
 
+    // debugger;
     if (currentIndex !== 3) {
       if (direction > 0) {
         // If next index is greater than sections count, do nothing
@@ -220,7 +219,6 @@ document.addEventListener(
       }
     } else {
       event.preventDefault();
-
       if (direction < 0)
         $currPanel
           .find('.panel__info')
@@ -286,11 +284,16 @@ function goToPrevSection(event) {
   currentIndex--;
   // Get the previous section
   var $previousSection = $($sections[currentIndex]);
-  // Get the previous section offset
-  var offsetTop = $previousSection.offset().top;
 
   // Animate scroll
-  $('html, body').animate({ scrollTop: offsetTop }, 250, stopAnimation);
+  const href = $('.nav__item').eq(currentIndex).find('a').attr('href');
+  $(href)[0].scrollIntoView();
+  stopAnimation();
+
+  setTimeout(
+    moveNavUnderline.bind(null, $('.nav__item').eq(currentIndex).find('.nav__link')),
+    250
+  );
 }
 
 function goToNextSection(event) {
@@ -302,11 +305,16 @@ function goToNextSection(event) {
   currentIndex++;
   // Get the next section
   var $nextSection = $($sections[currentIndex]);
-  // Get the next section offset
-  var offsetTop = $nextSection.offset().top;
 
   // Animate scroll
-  $('html, body').animate({ scrollTop: offsetTop }, 250, stopAnimation);
+  const href = $('.nav__item').eq(currentIndex).find('a').attr('href');
+  $(href)[0].scrollIntoView();
+  stopAnimation();
+
+  setTimeout(
+    moveNavUnderline.bind(null, $('.nav__item').eq(currentIndex).find('.nav__link')),
+    250
+  );
 }
 
 $.fn.isYScrollable = function () {
@@ -335,18 +343,22 @@ $('.nav__list:has(.nav__item-underline)').each(function initialize() {
 
 const initialMargin = $('.nav__list .nav__item-underline').position().left;
 
+moveNavUnderline = function ($elem) {
+  const $targetdNavAnchor = $elem;
+  const $parent = $targetdNavAnchor.parent();
+  const $container = $parent.closest('.nav__list');
+  const $nav_item = $parent.closest('.nav__item');
+  const $underline = $container.find('.nav__item-underline');
+
+  const left = $nav_item.position().left + initialMargin;
+  const width = $nav_item.outerWidth();
+
+  $underline.css({ left, width });
+};
+
 $('.nav__list:has(.nav__item-underline) > li > a')
   .on('mouseenter focus', function () {
-    const $this = $(this);
-    const $parent = $this.parent();
-    const $container = $parent.closest('.nav__list');
-    const $nav_item = $parent.closest('.nav__item');
-    const $underline = $container.find('.nav__item-underline');
-
-    const left = $nav_item.position().left + initialMargin;
-    const width = $nav_item.outerWidth();
-
-    $underline.css({ left, width });
+    moveNavUnderline($(this));
   })
   .on('mouseleave blur', function () {
     const $this = $(this);
