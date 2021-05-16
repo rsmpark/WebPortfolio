@@ -315,6 +315,56 @@ $.fn.isYScrollable = function () {
   return this[0].scrollHeight > this[0].clientHeight;
 };
 
+/* Carousel Logic */
+
+const $carousel = $('.carousel__track');
+const $slides = $('.project');
+
+const nextSlide = function ($slide) {
+  if ($slide.next().length > 0) {
+    return $slide.next();
+  } else {
+    return $slides.first();
+  }
+};
+
+const prevSlide = function ($slide) {
+  if ($slide.prev().length > 0) {
+    return $slide.prev();
+  } else {
+    return $slides.last();
+  }
+};
+
+$('.carousel__actions button').on('click', function (e) {
+  var i, j, $new_seat, ref;
+  const $lastSlide = $('.work .carousel__track .is-ref').removeClass('is-ref');
+
+  if ($(this).index() === 0) {
+    // Previous button clicked
+    $new_seat = nextSlide($lastSlide);
+    $carousel.removeClass('is-reversing');
+  } else {
+    // Next button clicked
+    $new_seat = prevSlide($lastSlide);
+    $carousel.addClass('is-reversing');
+  }
+  $new_seat.addClass('is-ref').css('order', 1);
+
+  for (
+    i = j = 2, ref = $slides.length;
+    2 <= ref ? j <= ref : j >= ref;
+    i = 2 <= ref ? ++j : --j
+  ) {
+    $new_seat = nextSlide($new_seat).css('order', i);
+  }
+
+  $carousel.removeClass('is-set');
+  return setTimeout(function () {
+    return $carousel.addClass('is-set');
+  }, 50);
+});
+
 /* Nav Scroll */
 
 $('.nav__item').on('click', function () {
@@ -367,136 +417,95 @@ $('.nav__list:has(.nav__item-underline) > li > a')
   });
 
 /* Experience Tab Underline Animation */
-$('.experience__lst:has(.experience__lst-underline)').each(function initialize() {
+const expTabHorAnimationInit = function () {
   const $container = $(this);
   const $active = $container.find('li.active').first();
-  const $underline = $container.find('.experience__lst-underline');
+  const $underline = $container.find('.experience__lst-underline.horizontal');
+
+  const left = $active.position().left;
+  const width = $active.outerWidth();
+
+  $underline.css({ left, width });
+};
+
+const handleExpTabHorMouseEnter = function () {
+  const $this = $(this);
+  const $parent = $this.parent();
+  const $container = $parent.closest('.experience__lst');
+  const $underline = $container.find('.experience__lst-underline.horizontal');
+
+  const left = $parent.position().left;
+  const width = $parent.outerWidth();
+
+  $underline.css({ left, width });
+};
+
+const handleExpTabHorMouseLeave = function () {
+  const $this = $(this);
+  const $container = $this.closest('.experience__lst');
+  const $active = $container.find('li.active').first();
+  const $underline = $container.find('.experience__lst-underline.horizontal');
+
+  const left = $active.position().left;
+  const width = $active.outerWidth();
+
+  $underline.css({ left, width });
+};
+
+const expTabVerAnimationInit = function () {
+  const $container = $(this);
+  const $active = $container.find('li.active').first();
+  const $underline = $container.find('.experience__lst-underline.vertical');
 
   const top = $active.position().top;
   const height = $active.outerHeight();
 
   $underline.css({ top, height });
-});
-
-$('.experience__lst:has(.experience__lst-underline) > li > button')
-  .on('mouseenter focus', function () {
-    const $this = $(this);
-    const $parent = $this.parent();
-    const $container = $parent.closest('.experience__lst');
-    const $underline = $container.find('.experience__lst-underline');
-
-    const top = $parent.position().top;
-    const height = $parent.outerHeight();
-
-    $underline.css({ top, height });
-  })
-  .on('mouseleave blur', function () {
-    const $this = $(this);
-    const $container = $this.closest('.experience__lst');
-    const $active = $container.find('li.active').first();
-    const $underline = $container.find('.experience__lst-underline');
-
-    const top = $active.position().top;
-    const height = $active.outerHeight();
-
-    $underline.css({ top, height });
-  });
-
-/* Carousel Logic */
-
-// const $carouselTrack = $('.carousel .carousel__track');
-// const $carouselSlides = $carouselTrack.children();
-// const $carouselNext = $carouselTrack
-//   .parent()
-//   .next('.carousel__actions')
-//   .children('#carousel__button--next');
-// const $carouselPrev = $carouselTrack
-//   .parent()
-//   .next('.carousel__actions')
-//   .children('#carousel__button--prev');
-
-// const slideWidth = $carouselSlides[0].getBoundingClientRect().width;
-
-// $carouselSlides.each((index, slide) => {
-//   // padding = 10;
-
-//   slide.style.left = slideWidth * index + 'px';
-// });
-
-// const moveToSlide = (carouselTrack, currSlide, targetSlide, slideAmount) => {
-//   carouselTrack.css('transform', `translateX(-${slideAmount})`);
-//   currSlide.removeClass('current-slide');
-//   targetSlide.addClass('current-slide');
-// };
-
-// $carouselPrev.on('click', (event) => {
-//   const $currSlide = $carouselTrack.children('.current-slide');
-//   const $prevSlide = $currSlide.prev();
-//   const slideAmount = $prevSlide[0].style.left;
-
-//   moveToSlide($carouselTrack, $currSlide, $prevSlide, slideAmount);
-// });
-
-// $carouselNext.on('click', (event) => {
-//   const $currSlide = $carouselTrack.children('.current-slide');
-//   const $nextSlide = $currSlide.next();
-//   const slideAmount = $nextSlide[0].style.left;
-
-//   moveToSlide($carouselTrack, $currSlide, $nextSlide, slideAmount);
-// });
-
-const $carousel = $('.carousel__track');
-const $slides = $('.project');
-
-const nextSlide = function ($slide) {
-  if ($slide.next().length > 0) {
-    return $slide.next();
-  } else {
-    return $slides.first();
-  }
 };
 
-const prevSlide = function ($slide) {
-  if ($slide.prev().length > 0) {
-    return $slide.prev();
-  } else {
-    return $slides.last();
-  }
+const handleExpTabVerMouseEnter = function () {
+  const $this = $(this);
+  const $parent = $this.parent();
+  const $container = $parent.closest('.experience__lst');
+  const $underline = $container.find('.experience__lst-underline.vertical');
+
+  const top = $parent.position().top;
+  const height = $parent.outerHeight();
+
+  $underline.css({ top, height });
 };
 
-$('.carousel__actions button').on('click', function (e) {
-  var i, j, $new_seat, ref;
-  const $lastSlide = $('.work .carousel__track .is-ref').removeClass('is-ref');
+const handleExpTabVerMouseLeave = function () {
+  const $this = $(this);
+  const $container = $this.closest('.experience__lst');
+  const $active = $container.find('li.active').first();
+  const $underline = $container.find('.experience__lst-underline.vertical');
 
-  if ($(this).index() === 0) {
-    // Previous button clicked
-    $new_seat = nextSlide($lastSlide);
-    $carousel.removeClass('is-reversing');
-  } else {
-    // Next button clicked
-    $new_seat = prevSlide($lastSlide);
-    $carousel.addClass('is-reversing');
-  }
-  $new_seat.addClass('is-ref').css('order', 1);
+  const top = $active.position().top;
+  const height = $active.outerHeight();
 
-  for (
-    i = j = 2, ref = $slides.length;
-    2 <= ref ? j <= ref : j >= ref;
-    i = 2 <= ref ? ++j : --j
-  ) {
-    $new_seat = nextSlide($new_seat).css('order', i);
-  }
+  $underline.css({ top, height });
+};
 
-  $carousel.removeClass('is-set');
-  return setTimeout(function () {
-    return $carousel.addClass('is-set');
-  }, 50);
-});
+$('.experience__lst:has(.experience__lst-underline.vertical)').each(
+  expTabVerAnimationInit
+);
+
+$('.experience__lst:has(.experience__lst-underline.vertical) > li > button')
+  .on('mouseenter focus', handleExpTabVerMouseEnter)
+  .on('mouseleave blur', handleExpTabVerMouseLeave);
+
+$('.experience__lst:has(.experience__lst-underline.horizontal)').each(
+  expTabHorAnimationInit
+);
+
+$('.experience__lst:has(.experience__lst-underline.horizontal) > li > button')
+  .on('mouseenter focus', handleExpTabHorMouseEnter)
+  .on('mouseleave blur', handleExpTabHorMouseLeave);
 
 let isMobileSize = false;
 
 $(window).resize(function () {
-  console.log(isMobileSize);
   if ($(this).width() <= 860 && !isMobileSize) {
     isMobileSize = true;
     document.removeEventListener('wheel', scrollHadler, { passive: false });

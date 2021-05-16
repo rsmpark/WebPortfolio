@@ -533,7 +533,7 @@ button {
   position: relative;
 }
 
-.experience__lst-underline {
+.experience__lst-underline.vertical {
   position: absolute;
   left: 0px;
   bottom: 0;
@@ -542,6 +542,10 @@ button {
   background: var(--second-color);
   will-change: top, height;
   transition: top .3s, height .3s;
+}
+
+.experience__lst-underline.horizontal {
+  display: none
 }
 
 .experience__item {
@@ -560,7 +564,7 @@ button {
   text-align: left;
   white-space: nowrap;
   font-family: inherit;
-  font-size: 0.8em;
+  font-size: 0.9em;
   letter-spacing: 0.5px;
   color: var(--fourth-color);
   padding: 0px 25px 2px;
@@ -572,6 +576,10 @@ button {
   background-color: rgba(104, 67, 32, 0.1);
   color: var(--first-color);
   outline: 0px;
+}
+
+.experience__item button>span {
+  width: 100%
 }
 
 .experience__panel {
@@ -610,7 +618,7 @@ button {
   color: var(--third-color);
   overflow-y: auto;
   -ms-overflow-style: none;
-  padding-right: 25px;
+  /* padding-right: 25px;c */
   scrollbar-width: none;
 }
 
@@ -1119,7 +1127,7 @@ button {
 @media screen and (max-width: 1080px) {
   .section {
     max-width: 620px;
-    font-size: 13px;
+    font-size: 14px;
   }
   .home__data {
     margin-top: 90px;
@@ -1170,13 +1178,12 @@ button {
     height: auto;
   }
   .section.experience {
-    max-width: 520px;
+    max-width: 620px;
   }
   .experience__lst {
     width: auto;
   }
   .experience__item button {
-    width: auto;
     padding: 0px 15px 2px;
   }
   .panel__info ul li .inner_list {
@@ -1228,7 +1235,7 @@ button {
     padding-left: 0px;
   }
   .section-title::after {
-    width: 170px;
+    width: 50%;
   }
   .home__title {
     font-size: .5em;
@@ -1286,6 +1293,36 @@ button {
     padding: 0.5rem 1rem;
     margin-bottom: 10px;
   }
+  .experience__container {
+    grid-template-columns: none;
+    grid-template-rows: 15% 85%;
+    text-align: initial;
+    margin: 60px auto 0;
+  }
+  .experience__lst {
+    display: flex;
+  }
+  .experience__lst-underline.vertical {
+    display: none;
+  }
+  .experience__lst-underline.horizontal {
+    display: inline-block;
+    position: absolute;
+    left: 0px;
+    top: 0;
+    width: 0px;
+    height: 2px;
+    background: var(--second-color);
+    will-change: left, width;
+    transition: left .3s, width .3s;
+  }
+  .experience__item button {
+    border-left: none;
+    border-top: 2px solid rgba(255, 255, 255, 0.25);
+  }
+  .experience__item button>span {
+    text-align: center;
+  }
   .project .work__img {
     width: 80%;
     margin: 0 auto;
@@ -1309,6 +1346,9 @@ button {
   .skills .section-title {
     margin-bottom: 20px;
   }
+  .section-title::after {
+    width: 30%;
+  }
   .skills__container {
     grid-template-columns: repeat(1, 1fr);
     grid-column-gap: 0;
@@ -1327,12 +1367,6 @@ button {
   }
   .section.experience {
     max-width: 420px;
-  }
-  .experience__container {
-    grid-template-columns: none;
-    grid-template-rows: 15% 85%;
-    text-align: initial;
-    margin: 60px auto 0;
   }
   .section.work {
     max-width: 420px;
