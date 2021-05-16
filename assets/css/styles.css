@@ -377,8 +377,6 @@ button {
 
 .about__img {
   position: relative;
-  margin-left: 10px;
-  margin-top: 12px;
   width: 75%;
 }
 
@@ -387,10 +385,10 @@ button {
 }
 
 .about__img .img__border:after {
-  top: 25px;
-  left: 25px;
+  top: 7%;
+  left: 5%;
   z-index: -1;
-  border-width: 2px;
+  border-width: 1.5px;
   border-style: solid;
   border-color: var(--first-color);
   border-image: initial;
@@ -431,7 +429,8 @@ button {
 
 .about__tech {
   display: grid;
-  grid-template-columns: repeat(3, minmax(140px, 240px));
+  grid-template-columns: repeat(3, minmax(80px, 160px));
+  row-gap: 5px;
   padding: 0px;
   margin: 20px 10px 0px;
   list-style: none;
@@ -767,7 +766,7 @@ button {
 }
 
 .carousel__actions button img {
-  width: 26px;
+  width: 1.4rem;
 }
 
 .carousel .carousel__track {
@@ -1147,14 +1146,6 @@ button {
   .about__text .about__text-info {
     margin-bottom: 12px;
   }
-  .about__tech {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(120px, 160px));
-    padding: 0px;
-    margin: 10px 5px 0px;
-    list-style: none;
-    font-size: 0.9em;
-  }
   .skills__container {
     grid-template-columns: repeat(3, 1fr);
     grid-column-gap: 0;
@@ -1223,7 +1214,7 @@ button {
     font-size: 1.3em;
   }
   .l-main {
-    padding: 0 70px;
+    padding: 0 20px;
   }
   .section {
     height: 100%;
@@ -1250,7 +1241,7 @@ button {
     margin-bottom: 20px;
   }
   .about__container {
-    row-gap: 1rem;
+    row-gap: 2.5rem;
     line-height: 26px;
     grid-template-rows: 300px;
     grid-column-gap: 0;
@@ -1265,17 +1256,17 @@ button {
   }
   .about__img {
     position: relative;
-    margin-left: 10px;
-    margin-top: 12px;
     justify-self: center;
-    width: 65%;
+    width: 55%;
     min-width: 240px;
   }
   .about__tech {
-    align-self: center;
-    grid-template-columns: repeat(3, minmax(120px, 180px));
-    padding: 0px;
-    margin: 20px auto 0;
+    grid-template-columns: repeat(3, minmax(60px, 140px));
+    margin: 20px 10px 0;
+    font-size: 1.1em;
+  }
+  .about__tech .tech__item {
+    margin-bottom: 5px;
   }
   .skills__container {
     grid-template-columns: repeat(3, 1fr);
@@ -1340,8 +1331,14 @@ button {
 }
 
 @media screen and (max-width:580px) {
+  .l-header {
+    padding: 0 25px;
+  }
   .section {
     max-width: 420px;
+  }
+  .home__data h1 {
+    line-height: 55px;
   }
   .skills .section-title {
     margin-bottom: 20px;
@@ -1369,7 +1366,7 @@ button {
     max-width: 420px;
   }
   .section.work {
-    max-width: 420px;
+    min-width: 220px;
     font-size: 13px;
     margin-top: 80px;
   }
@@ -1380,8 +1377,11 @@ button {
     align-items: flex-start;
   }
   .carousel__actions {
-    top: 46%;
+    top: 60%;
     font-size: 1rem;
+  }
+  .carousel__actions button img {
+    width: 1rem;
   }
   .project .work__img {
     visibility: hidden;
@@ -1391,6 +1391,10 @@ button {
     left: 13.4%;
     width: 70%;
     height: 26.5em;
+  }
+  .project .project-secondary-info {
+    bottom: -57%;
+    left: 13.4%;
   }
   .contact.section .heading p {
     margin: 0 60px;
