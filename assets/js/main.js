@@ -406,43 +406,91 @@ $('.experience__lst:has(.experience__lst-underline) > li > button')
 
 /* Carousel Logic */
 
-const $carouselTrack = $('.carousel .carousel__track');
-const $carouselSlides = $carouselTrack.children();
-const $carouselNext = $carouselTrack
-  .parent()
-  .next('.carousel__actions')
-  .children('#carousel__button--next');
-const $carouselPrev = $carouselTrack
-  .parent()
-  .next('.carousel__actions')
-  .children('#carousel__button--prev');
+// const $carouselTrack = $('.carousel .carousel__track');
+// const $carouselSlides = $carouselTrack.children();
+// const $carouselNext = $carouselTrack
+//   .parent()
+//   .next('.carousel__actions')
+//   .children('#carousel__button--next');
+// const $carouselPrev = $carouselTrack
+//   .parent()
+//   .next('.carousel__actions')
+//   .children('#carousel__button--prev');
 
-const slideWidth = $carouselSlides[0].getBoundingClientRect().width;
+// const slideWidth = $carouselSlides[0].getBoundingClientRect().width;
 
-$carouselSlides.each((index, slide) => {
-  // padding = 10;
+// $carouselSlides.each((index, slide) => {
+//   // padding = 10;
 
-  slide.style.left = slideWidth * index + 'px';
-});
+//   slide.style.left = slideWidth * index + 'px';
+// });
 
-const moveToSlide = (carouselTrack, currSlide, targetSlide, slideAmount) => {
-  carouselTrack.css('transform', `translateX(-${slideAmount})`);
-  currSlide.removeClass('current-slide');
-  targetSlide.addClass('current-slide');
+// const moveToSlide = (carouselTrack, currSlide, targetSlide, slideAmount) => {
+//   carouselTrack.css('transform', `translateX(-${slideAmount})`);
+//   currSlide.removeClass('current-slide');
+//   targetSlide.addClass('current-slide');
+// };
+
+// $carouselPrev.on('click', (event) => {
+//   const $currSlide = $carouselTrack.children('.current-slide');
+//   const $prevSlide = $currSlide.prev();
+//   const slideAmount = $prevSlide[0].style.left;
+
+//   moveToSlide($carouselTrack, $currSlide, $prevSlide, slideAmount);
+// });
+
+// $carouselNext.on('click', (event) => {
+//   const $currSlide = $carouselTrack.children('.current-slide');
+//   const $nextSlide = $currSlide.next();
+//   const slideAmount = $nextSlide[0].style.left;
+
+//   moveToSlide($carouselTrack, $currSlide, $nextSlide, slideAmount);
+// });
+
+const $carousel = $('.carousel__track');
+const $slides = $('.project');
+
+const nextSlide = function ($slide) {
+  if ($slide.next().length > 0) {
+    return $slide.next();
+  } else {
+    return $slides.first();
+  }
 };
 
-$carouselPrev.on('click', (event) => {
-  const $currSlide = $carouselTrack.children('.current-slide');
-  const $prevSlide = $currSlide.prev();
-  const slideAmount = $prevSlide[0].style.left;
+const prevSlide = function ($slide) {
+  if ($slide.prev().length > 0) {
+    return $slide.prev();
+  } else {
+    return $slides.last();
+  }
+};
 
-  moveToSlide($carouselTrack, $currSlide, $prevSlide, slideAmount);
-});
+$('.carousel__actions button').on('click', function (e) {
+  var i, j, $new_seat, ref;
+  const $lastSlide = $('.work .carousel__track .is-ref').removeClass('is-ref');
 
-$carouselNext.on('click', (event) => {
-  const $currSlide = $carouselTrack.children('.current-slide');
-  const $nextSlide = $currSlide.next();
-  const slideAmount = $nextSlide[0].style.left;
+  if ($(this).index() === 0) {
+    // Previous button clicked
+    $new_seat = nextSlide($lastSlide);
+    $carousel.removeClass('is-reversing');
+  } else {
+    // Next button clicked
+    $new_seat = prevSlide($lastSlide);
+    $carousel.addClass('is-reversing');
+  }
+  $new_seat.addClass('is-ref').css('order', 1);
 
-  moveToSlide($carouselTrack, $currSlide, $nextSlide, slideAmount);
+  for (
+    i = j = 2, ref = $slides.length;
+    2 <= ref ? j <= ref : j >= ref;
+    i = 2 <= ref ? ++j : --j
+  ) {
+    $new_seat = nextSlide($new_seat).css('order', i);
+  }
+
+  $carousel.removeClass('is-set');
+  return setTimeout(function () {
+    return $carousel.addClass('is-set');
+  }, 50);
 });

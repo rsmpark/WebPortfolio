@@ -35,7 +35,7 @@ h2 {
   margin: auto;
   height: 100vh;
   font-size: 16px;
-  border: red 2px solid
+  /* border: red 2px solid */
 }
 
 .section-title {
@@ -516,13 +516,12 @@ button {
 
 /* ===== EXPERIENCE =====*/
 
-#experience {
+.experience {
   max-width: 900px;
 }
 
 .experience__container {
   grid-template-columns: 15% 85%;
-  align-items: flex-start;
   text-align: initial;
   margin: 60px 0 0 5px;
 }
@@ -723,7 +722,7 @@ button {
 .work__container {
   position: relative;
   height: 480px;
-  max-width: 1200px;
+  max-width: 1280px;
   width: 100%;
   margin: 0 auto;
 }
@@ -733,49 +732,16 @@ button {
   overflow: hidden;
   margin: 0 auto;
   position: absolute;
-  left: 50%;
-  transform: translate(-50%, 0);
   height: 480px;
-}
-
-.carousel .carousel__track {
-  width: 100%;
-  height: 470px;
-  position: relative;
-  transition: transform 250ms ease-in;
-  display: inline-block;
-  border: rebeccapurple 3px solid;
-}
-
-.carousel .carousel__track .carousel__slide.current-slide {
-  opacity: 1;
-}
-
-.carousel .carousel__track .carousel__slide {
-  opacity: 0;
-  transition: opacity 0.3s cubic-bezier(.1, 1.15, .59, .26)
-}
-
-.carousel .carousel__track .bd-grid {
-  border: green 3px solid;
-  padding: 15px;
-  grid-template-columns: repeat(3, 1fr);
-  max-width: none;
-  grid-column-gap: 2em;
-  width: 100%;
-  position: absolute;
-  height: 80%;
-  align-items: center;
-  margin: 0 auto;
 }
 
 .carousel__actions {
   position: absolute;
   display: flex;
-  width: 120%;
+  width: 110%;
   margin: 0 auto;
   justify-content: space-between;
-  top: 45%;
+  top: 52%;
   left: 50%;
   z-index: 100;
   transform: translateY(-50%) translateX(-50%);
@@ -791,16 +757,83 @@ button {
   width: 26px;
 }
 
+.carousel .carousel__track {
+  display: flex;
+  flex-wrap: nowrap;
+  position: relative;
+  height: 470px;
+  margin: 0 auto;
+  /* padding: 15px; */
+  align-items: center;
+  left: -100%;
+  transform: translateX(100%);
+  /* transition: transform 2s ease; */
+}
+
+@media (min-width: 1080px) {
+  .carousel .carousel__track {
+    left: -50%;
+    transform: translateX(50%);
+  }
+}
+
+@media (min-width: 1486px) {
+  .carousel .carousel__track {
+    left: -33.33333%;
+    transform: translateX(33.33333%);
+  }
+}
+
+.carousel .carousel__track.is-reversing {
+  transform: translateX(-100%);
+}
+
+@media (min-width: 1080px) {
+  .carousel .carousel__track.is-reversing {
+    transform: translateX(-50%);
+  }
+}
+
+@media (min-width: 1486px) {
+  .carousel .carousel__track.is-reversing {
+    transform: translateX(-33.33333%);
+  }
+}
+
+.carousel .carousel__track.is-set {
+  transform: none;
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
 .project {
   position: relative;
+  flex: 1 0 100%;
+  order: 2;
+  padding: 0 25px;
   color: white;
-  width: 22em;
   box-shadow: 10px 10px 25px -20px rgba(0, 0, 0, 0.3);
+  opacity: 1;
+}
+
+@media (min-width: 1080px) {
+  .project {
+    flex-basis: 50%;
+  }
+}
+
+@media (min-width: 1486px) {
+  .project {
+    flex-basis: 33.33333%;
+  }
+}
+
+.project.is-ref {
+  order: 1;
 }
 
 .project .work__img {
-  overflow: hidden;
   width: 95%;
+  position: relative;
 }
 
 .project .work__img img {
@@ -819,7 +852,7 @@ button {
 }
 
 .project .overlay {
-  width: 95%;
+  width: 100%;
   height: 17em;
   top: 0;
   position: absolute;
@@ -836,7 +869,7 @@ button {
 .project .project-info-card {
   position: absolute;
   top: 100px;
-  left: 140px;
+  left: 180px;
   width: 14.5em;
   height: 13.5em;
   opacity: 1;
@@ -1058,8 +1091,6 @@ button {
   }
 }
 
-@media screen and (min-width: 1024px) {}
-
 @media screen and (max-width: 1485px) {
   .section {
     max-width: 760px;
@@ -1069,8 +1100,57 @@ button {
     padding-right: 0;
   }
   .section.work {
-    /* max-width: 960px; */
+    max-width: 860px;
     font-size: 16px;
+  }
+  .project {
+    padding: 40px
+  }
+  .project .project-info-card {
+    top: 130px;
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  .section.home {
+    max-width: 720px;
+    padding-left: 100px;
+  }
+  .section.skills {
+    max-width: 710px;
+    font-size: 12px;
+  }
+  .skills__data .skills__icon {
+    width: 50px;
+  }
+  .section.experience {
+    max-width: 520px;
+  }
+  .experience__lst {
+    width: auto;
+  }
+  .experience__item button {
+    width: auto;
+    padding: 0px 15px 2px;
+  }
+  .section.work {
+    max-width: 660px;
+    font-size: 16px;
+  }
+  .project {
+    padding-left: 55px;
+  }
+  .project .project-info-card {
+    top: 180px;
+    left: 33%;
+  }
+  .panel__info .text__container>p span {
+    font-size: 10px;
+    margin-left: 0;
+  }
+  .panel__info .text__container>p span::before {
+    content: "\a";
+    white-space: pre;
   }
 }
 
