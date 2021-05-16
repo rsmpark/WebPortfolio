@@ -184,24 +184,48 @@ var topIsReached = function ($elem) {
 let isPanelBottom = false;
 let isPanelTop = false;
 
-// Define wheel event handler
-document.addEventListener(
-  'wheel',
-  function (event) {
-    event.preventDefault();
-    // If animation is in progress
-    if (isAnimating) {
-      return;
+const scrollHadler = function (event) {
+  event.preventDefault();
+  // If animation is in progress
+  if (isAnimating) {
+    return;
+  }
+
+  // Get the current section
+  var $currentSection = $($sections[currentIndex]);
+
+  // Get the mouse wheel spin direction
+  var direction = event.deltaY;
+
+  // debugger;
+  if (currentIndex !== 3) {
+    if (direction > 0) {
+      // If next index is greater than sections count, do nothing
+      if (currentIndex + 1 >= $sections.length) return;
+      // If bottom is not reached allow the default behaviour
+      if (!bottomIsReached($currentSection)) return;
+      // Go to next
+      goToNextSection(event);
+    } else {
+      // If previous index is negative, do nothing
+      if (currentIndex - 1 < 0) return;
+      // If top is not reached allow the default behaviour
+      if (!topIsReached($currentSection)) return;
+      // Go to prev
+      goToPrevSection(event);
     }
+  } else {
+    event.preventDefault();
+    if (direction < 0)
+      $currPanel
+        .find('.panel__info')
+        .scrollTop($currPanel.find('.panel__info').scrollTop() - 15);
+    else if (direction > 0)
+      $currPanel
+        .find('.panel__info')
+        .scrollTop($currPanel.find('.panel__info').scrollTop() + 15);
 
-    // Get the current section
-    var $currentSection = $($sections[currentIndex]);
-
-    // Get the mouse wheel spin direction
-    var direction = event.deltaY;
-
-    // debugger;
-    if (currentIndex !== 3) {
+    if (!$currPanel.find('.panel__info').isYScrollable()) {
       if (direction > 0) {
         // If next index is greater than sections count, do nothing
         if (currentIndex + 1 >= $sections.length) return;
@@ -214,66 +238,40 @@ document.addEventListener(
         if (currentIndex - 1 < 0) return;
         // If top is not reached allow the default behaviour
         if (!topIsReached($currentSection)) return;
+
         // Go to prev
         goToPrevSection(event);
       }
     } else {
-      event.preventDefault();
-      if (direction < 0)
-        $currPanel
-          .find('.panel__info')
-          .scrollTop($currPanel.find('.panel__info').scrollTop() - 15);
-      else if (direction > 0)
-        $currPanel
-          .find('.panel__info')
-          .scrollTop($currPanel.find('.panel__info').scrollTop() + 15);
-
-      if (!$currPanel.find('.panel__info').isYScrollable()) {
-        if (direction > 0) {
-          // If next index is greater than sections count, do nothing
-          if (currentIndex + 1 >= $sections.length) return;
-          // If bottom is not reached allow the default behaviour
-          if (!bottomIsReached($currentSection)) return;
-          // Go to next
+      if (
+        $currPanel.find('.panel__info').scrollTop() +
+          $currPanel.find('.panel__info').innerHeight() >=
+        $currPanel.find('.panel__info')[0].scrollHeight
+      ) {
+        if (isPanelBottom) {
           goToNextSection(event);
+          isPanelBottom = false;
         } else {
-          // If previous index is negative, do nothing
-          if (currentIndex - 1 < 0) return;
-          // If top is not reached allow the default behaviour
-          if (!topIsReached($currentSection)) return;
-
-          // Go to prev
-          goToPrevSection(event);
+          setTimeout(function () {
+            isPanelBottom = true;
+          }, 500);
         }
-      } else {
-        if (
-          $currPanel.find('.panel__info').scrollTop() +
-            $currPanel.find('.panel__info').innerHeight() >=
-          $currPanel.find('.panel__info')[0].scrollHeight
-        ) {
-          if (isPanelBottom) {
-            goToNextSection(event);
-            isPanelBottom = false;
-          } else {
-            setTimeout(function () {
-              isPanelBottom = true;
-            }, 500);
-          }
-        } else if ($currPanel.find('.panel__info').scrollTop() === 0) {
-          if (isPanelTop) {
-            goToPrevSection(event);
-            isPanelTop = false;
-          } else {
-            setTimeout(function () {
-              isPanelTop = true;
-            }, 500);
-          }
+      } else if ($currPanel.find('.panel__info').scrollTop() === 0) {
+        if (isPanelTop) {
+          goToPrevSection(event);
+          isPanelTop = false;
+        } else {
+          setTimeout(function () {
+            isPanelTop = true;
+          }, 500);
         }
       }
     }
-  },
-  { passive: false }
-);
+  }
+};
+
+// Define wheel event handler
+document.addEventListener('wheel', scrollHadler, { passive: false });
 
 function goToPrevSection(event) {
   // Prevent the default mouse wheel behaviour
@@ -493,4 +491,17 @@ $('.carousel__actions button').on('click', function (e) {
   return setTimeout(function () {
     return $carousel.addClass('is-set');
   }, 50);
+});
+
+let isMobileSize = false;
+
+$(window).resize(function () {
+  console.log(isMobileSize);
+  if ($(this).width() <= 1080 && !isMobileSize) {
+    isMobileSize = true;
+    document.removeEventListener('wheel', scrollHadler, { passive: false });
+  } else if ($(this).width() > 1080) {
+    document.addEventListener('wheel', scrollHadler, { passive: false });
+    isMobileSize = false;
+  }
 });

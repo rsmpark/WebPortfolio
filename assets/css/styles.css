@@ -234,7 +234,7 @@ h2 {
   display: flex;
   flex-direction: column;
   position: fixed;
-  left: 75px;
+  left: 55px;
   bottom: 1px;
 }
 
@@ -604,8 +604,7 @@ button {
 }
 
 .panel__info {
-  /* max-height: 550px; */
-  height: 100%;
+  height: 450px;
   color: var(--third-color);
   overflow-y: auto;
   -ms-overflow-style: none;
@@ -1132,6 +1131,14 @@ button {
   .experience__item button {
     width: auto;
     padding: 0px 15px 2px;
+  }
+  .panel__info ul li .inner_list {
+    display: grid;
+    grid-template-columns: none;
+    grid-template-rows: auto;
+  }
+  .panel__info ul .info__items.drop__active {
+    margin-left: 10px;
   }
   .section.work {
     max-width: 660px;
