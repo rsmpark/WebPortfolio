@@ -13,7 +13,20 @@ html {
 body {
   background-color: var(--bg-color);
   width: 100%;
-  min-height: 100%
+  min-height: 100%;
+}
+
+body.blur .l-main>* {
+  filter: blur(5px) brightness(0.7);
+  transition-property: -moz-filter, -ms-filter, -o-filter, -webkit-filter, filter;
+  transition-duration: 0.5s;
+  pointer-events: none;
+  user-select: none;
+}
+
+body .l-main>* {
+  transition-property: -moz-filter, -ms-filter, -o-filter, -webkit-filter, filter;
+  transition-duration: 0.5s;
 }
 
 h2 {
@@ -125,13 +138,22 @@ h2 {
 @media screen and (max-width: 860px) {
   .nav__menu {
     position: fixed;
-    top: var(--header-height);
-    right: -100%;
-    width: 80%;
+    top: 0;
+    width: 220px;
+    right: -220px;
     height: 100%;
-    padding: 2rem;
     background-color: var(--second-color);
     transition: 0.5s;
+  }
+  .nav__list {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    margin-top: 50px;
+    height: 100%;
+  }
+  .nav__item {
+    margin: 50px 30px 0 0;
   }
 }
 
@@ -171,12 +193,13 @@ h2 {
   color: var(--first-color);
   font-size: 1.5rem;
   cursor: pointer;
+  z-index: 200;
 }
 
 /*=== Show menu ===*/
 
 .show {
-  right: 0;
+  transform: translateX(-220px);
 }
 
 /*===== HOME =====*/
@@ -1216,6 +1239,9 @@ button {
   .l-main {
     padding: 0 20px;
   }
+  .l-header {
+    padding: 0 25px;
+  }
   .section {
     height: 100%;
     font-size: 12px;
@@ -1331,11 +1357,9 @@ button {
 }
 
 @media screen and (max-width:580px) {
-  .l-header {
-    padding: 0 25px;
-  }
   .section {
     max-width: 420px;
+    font-size: 14px;
   }
   .home__data h1 {
     line-height: 55px;
@@ -1350,7 +1374,7 @@ button {
     grid-template-columns: repeat(1, 1fr);
     grid-column-gap: 0;
     row-gap: 0;
-    font-size: 20px;
+    font-size: 18px;
   }
   .skills__names {
     width: 100%;
@@ -1361,9 +1385,6 @@ button {
   }
   .skills__data .skills__icon {
     margin-right: 40px;
-  }
-  .section.experience {
-    max-width: 420px;
   }
   .section.work {
     min-width: 220px;
