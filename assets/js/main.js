@@ -497,10 +497,10 @@ let isMobileSize = false;
 
 $(window).resize(function () {
   console.log(isMobileSize);
-  if ($(this).width() <= 1080 && !isMobileSize) {
+  if ($(this).width() <= 860 && !isMobileSize) {
     isMobileSize = true;
     document.removeEventListener('wheel', scrollHadler, { passive: false });
-  } else if ($(this).width() > 1080) {
+  } else if ($(this).width() > 860) {
     document.addEventListener('wheel', scrollHadler, { passive: false });
     isMobileSize = false;
   }

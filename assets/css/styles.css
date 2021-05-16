@@ -96,7 +96,7 @@ h2 {
   z-index: var(--z-fixed);
   background-color: var(--bg-color);
   transition: all 0.3s ease;
-  padding: 0 80px;
+  padding: 0 60px;
 }
 
 .l-header.hide {
@@ -122,7 +122,7 @@ h2 {
   height: calc(var(--header-height) + 1rem);
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 860px) {
   .nav__menu {
     position: fixed;
     top: var(--header-height);
@@ -198,7 +198,7 @@ h2 {
 }
 
 .home__title {
-  font-size: 4rem;
+  font-size: 4.5em;
 }
 
 .home__subtitle {
@@ -207,7 +207,7 @@ h2 {
 }
 
 .home__subtitle .home__span {
-  margin-left: 10px;
+  margin-left: 2px;
 }
 
 .home__data h1 {
@@ -376,7 +376,6 @@ button {
 }
 
 .about__img {
-  justify-self: flex-start;
   position: relative;
   margin-left: 10px;
   margin-top: 12px;
@@ -420,6 +419,10 @@ button {
 .about__text {
   font-size: 1em;
   line-height: 30px;
+}
+
+.about__text .about__text-info {
+  margin-bottom: 32px;
 }
 
 .about__text>p:last-of-type {
@@ -480,7 +483,6 @@ button {
   font-weight: var(--font-semi);
   padding: 0.5rem 1rem;
   margin-bottom: var(--mb-2);
-  box-shadow: 0 4px 25px rgba(14, 36, 49, 0.15);
 }
 
 .skills__data .skills__icon {
@@ -574,7 +576,7 @@ button {
 
 .experience__panel {
   max-height: 600px;
-  height: 400px;
+  height: 450px;
   opacity: 1;
   transition: all .5s;
 }
@@ -604,7 +606,7 @@ button {
 }
 
 .panel__info {
-  height: 450px;
+  height: 400px;
   color: var(--third-color);
   overflow-y: auto;
   -ms-overflow-style: none;
@@ -647,9 +649,13 @@ button {
 
 .panel__info ul .info__items {
   padding-left: 30px;
-  margin-bottom: 5px;
+  margin-bottom: 35px;
   margin-left: 0px;
   transition: margin-left 0.5s ease;
+}
+
+.panel__info ul .info__items:last-child {
+  margin-bottom: 10px;
 }
 
 .panel__info ul .info__items:hover {
@@ -681,7 +687,7 @@ button {
   grid-template-rows: auto;
   max-width: 800px;
   padding: 0px;
-  margin: 15px 0px 20px 46px;
+  /* margin: 15px 0px 20px 46px; */
   list-style: none;
   max-height: 0;
   opacity: 0;
@@ -769,9 +775,9 @@ button {
   /* transition: transform 2s ease; */
 }
 
-@media (min-width: 1080px) {
+@media (min-width: 1081px) {
   .carousel .carousel__track {
-    left: -50%;
+    left: -52.5%;
     transform: translateX(50%);
   }
 }
@@ -787,7 +793,7 @@ button {
   transform: translateX(-100%);
 }
 
-@media (min-width: 1080px) {
+@media (min-width: 1081px) {
   .carousel .carousel__track.is-reversing {
     transform: translateX(-50%);
   }
@@ -814,7 +820,7 @@ button {
   opacity: 1;
 }
 
-@media (min-width: 1080px) {
+@media (min-width: 1081px) {
   .project {
     flex-basis: 50%;
   }
@@ -888,7 +894,7 @@ button {
 }
 
 .project .project-info-card .project__desc h4 {
-  font-size: 0.9em;
+  font-size: 1em;
   font-weight: 700;
   margin: 4px 0 15px 0;
   letter-spacing: 1px;
@@ -896,7 +902,7 @@ button {
 
 .project .project-info-card .project__desc h5 {
   margin: 0;
-  font-size: 0.7em;
+  font-size: 0.8em;
   font-family: var(--code-font);
   font-weight: 100;
 }
@@ -904,7 +910,7 @@ button {
 .project .project-info-card .project__desc p {
   font-family: var(--code-font);
   font-weight: 100;
-  font-size: 10px;
+  font-size: 0.75em;
   line-height: 20px;
 }
 
@@ -1084,7 +1090,7 @@ button {
 
 /* ===== MEDIA QUERIES=====*/
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 861px) {
   .nav__toggle {
     display: none;
   }
@@ -1099,7 +1105,7 @@ button {
     padding-right: 0;
   }
   .section.work {
-    max-width: 860px;
+    max-width: 810px;
     font-size: 16px;
   }
   .project {
@@ -1111,16 +1117,57 @@ button {
 }
 
 @media screen and (max-width: 1080px) {
-  .section.home {
-    max-width: 720px;
-    padding-left: 100px;
+  .section {
+    max-width: 620px;
+    font-size: 13px;
   }
-  .section.skills {
-    max-width: 710px;
-    font-size: 12px;
+  .home__data {
+    margin-top: 90px;
+  }
+  .home__title {
+    font-size: 3.5em;
+  }
+  .section.home {
+    padding-left: 40px;
+  }
+  .home__subtitle {
+    font-size: 2.5em;
+  }
+  .home__social-icon {
+    font-size: 1.3rem;
+  }
+  .about__text .about__text-info {
+    margin-bottom: 12px;
+  }
+  .about__tech {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(120px, 160px));
+    padding: 0px;
+    margin: 10px 5px 0px;
+    list-style: none;
+    font-size: 0.9em;
+  }
+  .skills__container {
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 0;
+    row-gap: 0;
+    font-size: 13px;
+  }
+  .skills__data {
+    display: flex;
+    background-color: var(--bg-color);
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    font-weight: var(--font-semi);
+    padding: 0.5rem 1rem;
+    margin-bottom: 10px;
   }
   .skills__data .skills__icon {
     width: 50px;
+  }
+  .skills__icon.sm img {
+    height: auto;
   }
   .section.experience {
     max-width: 520px;
@@ -1140,6 +1187,14 @@ button {
   .panel__info ul .info__items.drop__active {
     margin-left: 10px;
   }
+  .panel__info .text__container>p span {
+    font-size: 12px;
+    margin-left: 0;
+  }
+  .panel__info .text__container>p span::before {
+    content: "\a";
+    white-space: pre;
+  }
   .section.work {
     max-width: 660px;
     font-size: 16px;
@@ -1148,30 +1203,162 @@ button {
     padding-left: 55px;
   }
   .project .project-info-card {
-    top: 180px;
-    left: 33%;
+    top: 20%;
+    left: 51%;
   }
-  .panel__info .text__container>p span {
-    font-size: 10px;
-    margin-left: 0;
-  }
-  .panel__info .text__container>p span::before {
-    content: "\a";
-    white-space: pre;
+  .carousel__actions {
+    width: 100%;
   }
 }
 
-@media screen and (max-width: 65.5em) {
-  .home__data h1 {
-    font-size: 55px;
+@media screen and (max-width:860px) {
+  p {
+    font-size: 1.3em;
   }
-}
-
-@media screen and (max-width: 58.5em) {
   .l-main {
-    padding: 0 110px;
+    padding: 0 70px;
+  }
+  .section {
+    height: 100%;
+    font-size: 12px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  .section.home {
+    padding-left: 0px;
+  }
+  .section-title::after {
+    width: 170px;
+  }
+  .home__title {
+    font-size: .5em;
   }
   .home__data h1 {
-    font-size: 45px;
+    font-size: 2.5rem;
+  }
+  .home__social {
+    display: none;
+  }
+  .about .section-title {
+    margin-bottom: 20px;
+  }
+  .about__container {
+    row-gap: 1rem;
+    line-height: 26px;
+    grid-template-rows: 300px;
+    grid-column-gap: 0;
+    grid-template-columns: none;
+    align-items: center;
+    text-align: initial;
+  }
+  .about__info {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .about__img {
+    position: relative;
+    margin-left: 10px;
+    margin-top: 12px;
+    justify-self: center;
+    width: 65%;
+    min-width: 240px;
+  }
+  .about__tech {
+    align-self: center;
+    grid-template-columns: repeat(3, minmax(120px, 180px));
+    padding: 0px;
+    margin: 20px auto 0;
+  }
+  .skills__container {
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 0;
+    row-gap: 0;
+    font-size: 14px;
+  }
+  .skills__data {
+    display: flex;
+    background-color: var(--bg-color);
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    font-weight: var(--font-semi);
+    padding: 0.5rem 1rem;
+    margin-bottom: 10px;
+  }
+  .project .work__img {
+    width: 80%;
+    margin: 0 auto;
+  }
+  .project .project-info-card {
+    top: 20%;
+    left: 120px;
+  }
+  .section.contact {
+    margin-bottom: 10rem;
+  }
+  .contact.section .heading p {
+    margin: 0 100px;
+  }
+}
+
+@media screen and (max-width:580px) {
+  .section {
+    max-width: 420px;
+  }
+  .skills .section-title {
+    margin-bottom: 20px;
+  }
+  .skills__container {
+    grid-template-columns: repeat(1, 1fr);
+    grid-column-gap: 0;
+    row-gap: 0;
+    font-size: 20px;
+  }
+  .skills__names {
+    width: 100%;
+    justify-content: center;
+  }
+  .skills__data {
+    margin-bottom: 25px;
+  }
+  .skills__data .skills__icon {
+    margin-right: 40px;
+  }
+  .section.experience {
+    max-width: 420px;
+  }
+  .experience__container {
+    grid-template-columns: none;
+    grid-template-rows: 15% 85%;
+    text-align: initial;
+    margin: 60px auto 0;
+  }
+  .section.work {
+    max-width: 420px;
+    font-size: 13px;
+    margin-top: 80px;
+  }
+  .work__container {
+    height: 360px
+  }
+  .carousel .carousel__track {
+    align-items: flex-start;
+  }
+  .carousel__actions {
+    top: 46%;
+    font-size: 1rem;
+  }
+  .project .work__img {
+    visibility: hidden;
+  }
+  .project .project-info-card {
+    top: 19%;
+    left: 13.4%;
+    width: 70%;
+    height: 26.5em;
+  }
+  .contact.section .heading p {
+    margin: 0 60px;
   }
 }
