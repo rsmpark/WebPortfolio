@@ -186,6 +186,44 @@ var topIsReached = function ($elem) {
   return rect.top >= 0;
 };
 
+function goToPrevSection(event) {
+  // Prevent the default mouse wheel behaviour
+  event.preventDefault();
+  // Set the animation state to true
+  isAnimating = true;
+
+  currentIndex--;
+
+  // Animate scroll
+  const href = $('.nav__item').eq(currentIndex).find('a').attr('href');
+  $(href)[0].scrollIntoView();
+  stopAnimation();
+
+  setTimeout(
+    moveNavUnderline.bind(null, $('.nav__item').eq(currentIndex).find('.nav__link')),
+    250
+  );
+}
+
+function goToNextSection(event) {
+  // Prevent the default mouse wheel behaviour
+  event.preventDefault();
+  // Set the animation state to true
+  isAnimating = true;
+
+  currentIndex++;
+
+  // Animate scroll
+  const href = $('.nav__item').eq(currentIndex).find('a').attr('href');
+  $(href)[0].scrollIntoView();
+  stopAnimation();
+
+  setTimeout(
+    moveNavUnderline.bind(null, $('.nav__item').eq(currentIndex).find('.nav__link')),
+    250
+  );
+}
+
 let isPanelBottom = false;
 let isPanelTop = false;
 
@@ -202,7 +240,6 @@ const scrollHadler = function (event) {
   // Get the mouse wheel spin direction
   var direction = event.deltaY;
 
-  // debugger;
   if (currentIndex !== 3) {
     if (direction > 0) {
       // If next index is greater than sections count, do nothing
@@ -277,44 +314,6 @@ const scrollHadler = function (event) {
 
 // Define wheel event handler
 document.addEventListener('wheel', scrollHadler, { passive: false });
-
-function goToPrevSection(event) {
-  // Prevent the default mouse wheel behaviour
-  event.preventDefault();
-  // Set the animation state to true
-  isAnimating = true;
-
-  currentIndex--;
-
-  // Animate scroll
-  const href = $('.nav__item').eq(currentIndex).find('a').attr('href');
-  $(href)[0].scrollIntoView();
-  stopAnimation();
-
-  setTimeout(
-    moveNavUnderline.bind(null, $('.nav__item').eq(currentIndex).find('.nav__link')),
-    250
-  );
-}
-
-function goToNextSection(event) {
-  // Prevent the default mouse wheel behaviour
-  event.preventDefault();
-  // Set the animation state to true
-  isAnimating = true;
-
-  currentIndex++;
-
-  // Animate scroll
-  const href = $('.nav__item').eq(currentIndex).find('a').attr('href');
-  $(href)[0].scrollIntoView();
-  stopAnimation();
-
-  setTimeout(
-    moveNavUnderline.bind(null, $('.nav__item').eq(currentIndex).find('.nav__link')),
-    250
-  );
-}
 
 $.fn.isYScrollable = function () {
   return this[0].scrollHeight > this[0].clientHeight;
