@@ -812,7 +812,7 @@ button {
 
 @media (min-width: 1486px) {
   .carousel .carousel__track {
-    left: -33.33333%;
+    left: -33.43333%;
     transform: translateX(33.33333%);
   }
 }
