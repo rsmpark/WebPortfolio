@@ -265,6 +265,14 @@ const scrollHadler = function (event) {
         }
     } else {
         event.preventDefault();
+        if (direction < 0)
+            $currPanel
+                .find('.panel__info')
+                .scrollTop($currPanel.find('.panel__info').scrollTop() - 15);
+        else if (direction > 0)
+            $currPanel
+                .find('.panel__info')
+                .scrollTop($currPanel.find('.panel__info').scrollTop() + 15);
         if (!$currPanel.find('.panel__info').isYScrollable()) {
             if (direction > 0) {
                 // If next index is greater than sections count, do nothing
