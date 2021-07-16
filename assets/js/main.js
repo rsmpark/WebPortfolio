@@ -1,18 +1,18 @@
 /*===== MENU SHOW =====*/
 
 $('#nav-toggle').on('click', function () {
-    $('#nav-menu').toggleClass('show');
-    $('body').toggleClass('blur');
+  $('#nav-menu').toggleClass('show');
+  $('body').toggleClass('blur');
 
-    $('.blur .l-main').one('click', function () {
-        $('#nav-menu').removeClass('show');
-        $('body').removeClass('blur');
-    });
+  $('.blur .l-main').one('click', function () {
+    $('#nav-menu').removeClass('show');
+    $('body').removeClass('blur');
+  });
 
-    $('.blur .nav__link').one('click', function () {
-        $('#nav-menu').removeClass('show');
-        $('body').removeClass('blur');
-    });
+  $('.blur .nav__link').one('click', function () {
+    $('#nav-menu').removeClass('show');
+    $('body').removeClass('blur');
+  });
 });
 
 // showMenu('nav-toggle', 'nav-menu');
@@ -21,13 +21,13 @@ $('#nav-toggle').on('click', function () {
 const navLink = document.querySelectorAll('.nav__link');
 
 function linkAction() {
-    /*Active link*/
-    navLink.forEach((n) => n.classList.remove('active'));
-    this.classList.add('active');
+  /*Active link*/
+  navLink.forEach((n) => n.classList.remove('active'));
+  this.classList.add('active');
 
-    /*Remove menu mobile*/
-    const navMenu = document.getElementById('nav-menu');
-    navMenu.classList.remove('show');
+  /*Remove menu mobile*/
+  const navMenu = document.getElementById('nav-menu');
+  navMenu.classList.remove('show');
 }
 navLink.forEach((n) => n.addEventListener('click', linkAction));
 
@@ -119,41 +119,32 @@ var panelIndex = 0;
 var $currPanel = $expPanels.eq(panelIndex);
 
 $expItems.on('click', function () {
-    panelIndex = $($expItems).index(this);
+  panelIndex = $($expItems).index(this);
 
-    $('.experience__item.active').removeClass('active');
-    $(this).addClass('active');
+  $('.experience__item.active').removeClass('active');
+  $(this).addClass('active');
 
-    $expPanels.addClass('hidden');
-    $expPanels.addClass('visually-hidden');
-    $expPanels.eq(panelIndex).removeClass('hidden');
+  $expPanels.addClass('hidden');
+  $expPanels.addClass('visually-hidden');
+  $expPanels.eq(panelIndex).removeClass('hidden');
 
-    setTimeout(function () {
-        $expPanels.eq(panelIndex).removeClass('visually-hidden');
-    }, 20);
+  setTimeout(function () {
+    $expPanels.eq(panelIndex).removeClass('visually-hidden');
+  }, 20);
 
-    $currPanel = $expPanels.eq(panelIndex);
+  $currPanel = $expPanels.eq(panelIndex);
 });
 
 $('.panel__info .text__container').on('click', function () {
-    let idx = $(this).parent().index();
+  let idx = $(this).parent().index();
 
-    const isDropActive = !$currPanel
-        .find('.panel__info ul li.info__items')
-        .eq(idx)
-        .hasClass('drop__active');
+  const isDropActive = !$currPanel.find('.panel__info ul li.info__items').eq(idx).hasClass('drop__active');
 
-    if (isDropActive) {
-        $currPanel
-            .find('.panel__info ul li.info__items')
-            .eq(idx)
-            .addClass('drop__active');
-    } else {
-        $currPanel
-            .find('.panel__info ul li.info__items')
-            .eq(idx)
-            .removeClass('drop__active');
-    }
+  if (isDropActive) {
+    $currPanel.find('.panel__info ul li.info__items').eq(idx).addClass('drop__active');
+  } else {
+    $currPanel.find('.panel__info ul li.info__items').eq(idx).removeClass('drop__active');
+  }
 });
 
 /* Scroll Logic */
@@ -171,158 +162,158 @@ var isAnimating = false;
 var isBottom = false;
 var isTop = false;
 
+var scrollCounter = 0;
+
 // Define the animation finish callback
 var stopAnimation = function () {
-    // We add the 300 ms timeout to debounce the mouse wheel event
-    setTimeout(function () {
-        // Set the animation state to false
-        isAnimating = false;
-    }, 500);
+  scrollCounter = 0;
+  // We add the 300 ms timeout to debounce the mouse wheel event
+  setTimeout(function () {
+    // Set the animation state to false
+    isAnimating = false;
+  }, 500);
 };
 
 // Function returns true if DOM element bottom is reached
 var bottomIsReached = function ($elem) {
-    var rect = $elem[0].getBoundingClientRect();
-    return rect.bottom <= $(window).height();
+  var rect = $elem[0].getBoundingClientRect();
+  //   console.log(`currIdx: ${currentIndex} rect: ${rect.bottom}  window: ${$(window).height()}`);
+  return rect.bottom <= $(window).height();
 };
 
 // Function returns true if DOM element top is reached
 var topIsReached = function ($elem) {
-    var rect = $elem[0].getBoundingClientRect();
-    return rect.top >= 0;
+  var rect = $elem[0].getBoundingClientRect();
+  return rect.top >= 0;
 };
 
 function goToPrevSection(event) {
-    // Prevent the default mouse wheel behaviour
-    event.preventDefault();
-    // Set the animation state to true
-    isAnimating = true;
+  // Prevent the default mouse wheel behaviour
+  event.preventDefault();
+  // Set the animation state to true
+  isAnimating = true;
 
-    currentIndex--;
+  currentIndex--;
 
-    // Animate scroll
-    const href = $('.nav__item').eq(currentIndex).find('a').attr('href');
-    $(href)[0].scrollIntoView();
-    stopAnimation();
+  // Animate scroll
+  const href = $('.nav__item').eq(currentIndex).find('a').attr('href');
+  $(href)[0].scrollIntoView();
+  stopAnimation();
 
-    setTimeout(
-        moveNavUnderline.bind(null, $('.nav__item').eq(currentIndex).find('.nav__link')),
-        250
-    );
+  setTimeout(moveNavUnderline.bind(null, $('.nav__item').eq(currentIndex).find('.nav__link')), 250);
 }
 
 function goToNextSection(event) {
-    // Prevent the default mouse wheel behaviour
-    event.preventDefault();
-    // Set the animation state to true
-    isAnimating = true;
+  // Prevent the default mouse wheel behaviour
+  event.preventDefault();
+  // Set the animation state to true
+  isAnimating = true;
 
-    currentIndex++;
+  currentIndex++;
 
-    // Animate scroll
-    const href = $('.nav__item').eq(currentIndex).find('a').attr('href');
-    $(href)[0].scrollIntoView();
-    stopAnimation();
+  // Animate scroll
+  const href = $('.nav__item').eq(currentIndex).find('a').attr('href');
+  $(href)[0].scrollIntoView();
+  stopAnimation();
 
-    setTimeout(
-        moveNavUnderline.bind(null, $('.nav__item').eq(currentIndex).find('.nav__link')),
-        250
-    );
+  setTimeout(moveNavUnderline.bind(null, $('.nav__item').eq(currentIndex).find('.nav__link')), 250);
 }
 
 let isPanelBottom = false;
 let isPanelTop = false;
 
-const scrollHadler = function (event) {
-    event.preventDefault();
-    // If animation is in progress
-    if (isAnimating) {
-        return;
-    }
+const scrollHandler = function (event) {
+  event.preventDefault();
+  // If animation is in progress
 
-    // Get the current section
-    var $currentSection = $($sections[currentIndex]);
+  scrollCounter++;
 
-    // Get the mouse wheel spin direction
-    var direction = event.deltaY;
+  if (isAnimating) {
+    return;
+  }
 
-    // If not experience section
-    if (currentIndex !== 3) {
-        if (direction > 0) {
-            // If next index is greater than sections count, do nothing
-            if (currentIndex + 1 >= $sections.length) return;
-            // If bottom is not reached allow the default behaviour
-            if (!bottomIsReached($currentSection)) return;
-            // Go to next
-            goToNextSection(event);
-        } else {
-            // If previous index is negative, do nothing
-            if (currentIndex - 1 < 0) return;
-            // If top is not reached allow the default behaviour
-            if (!topIsReached($currentSection)) return;
-            // Go to prev
-            goToPrevSection(event);
-        }
+  // Get the current section
+  var $currentSection = $($sections[currentIndex]);
+
+  // Get the mouse wheel spin direction
+  var direction = event.deltaY;
+
+  // If not experience section
+  if (currentIndex !== 3) {
+    if (direction > 0) {
+      // If next index is greater than sections count, do nothing
+      if (currentIndex + 1 >= $sections.length) return;
+      // If bottom is not reached allow the default behaviour
+      if (!bottomIsReached($currentSection)) return;
+      // Go to next
+      goToNextSection(event);
     } else {
-        event.preventDefault();
-        if (direction < 0)
-            $currPanel
-                .find('.panel__info')
-                .scrollTop($currPanel.find('.panel__info').scrollTop() - 15);
-        else if (direction > 0)
-            $currPanel
-                .find('.panel__info')
-                .scrollTop($currPanel.find('.panel__info').scrollTop() + 15);
-        if (!$currPanel.find('.panel__info').isYScrollable()) {
-            if (direction > 0) {
-                // If next index is greater than sections count, do nothing
-                if (currentIndex + 1 >= $sections.length) return;
-                // If bottom is not reached allow the default behaviour
-                if (!bottomIsReached($currentSection)) return;
-                // Go to next
-                goToNextSection(event);
-            } else {
-                // If previous index is negative, do nothing
-                if (currentIndex - 1 < 0) return;
-                // If top is not reached allow the default behaviour
-                if (!topIsReached($currentSection)) return;
-
-                // Go to prev
-                goToPrevSection(event);
-            }
-        } else {
-            if (
-                $currPanel.find('.panel__info').scrollTop() +
-                    $currPanel.find('.panel__info').innerHeight() >=
-                $currPanel.find('.panel__info')[0].scrollHeight
-            ) {
-                if (isPanelBottom) {
-                    goToNextSection(event);
-                    isPanelBottom = false;
-                } else {
-                    setTimeout(function () {
-                        isPanelBottom = true;
-                    }, 500);
-                }
-            } else if ($currPanel.find('.panel__info').scrollTop() === 0) {
-                if (isPanelTop) {
-                    goToPrevSection(event);
-                    isPanelTop = false;
-                } else {
-                    setTimeout(function () {
-                        isPanelTop = true;
-                    }, 500);
-                }
-            }
-        }
+      // If previous index is negative, do nothing
+      if (currentIndex - 1 < 0) return;
+      // If top is not reached allow the default behaviour
+      if (!topIsReached($currentSection)) return;
+      // Go to prev
+      goToPrevSection(event);
     }
+  } else {
+    event.preventDefault();
+    if (!$currPanel.find('.panel__info').isYScrollable()) {
+      if (direction > 0) {
+        // If next index is greater than sections count, do nothing
+        if (currentIndex + 1 >= $sections.length) return;
+        // If bottom is not reached allow the default behaviour
+        if (!bottomIsReached($currentSection)) return;
+        // Go to next
+        goToNextSection(event);
+      } else {
+        // If previous index is negative, do nothing
+        if (currentIndex - 1 < 0) return;
+        // If top is not reached allow the default behaviour
+        if (!topIsReached($currentSection)) return;
+
+        // Go to prev
+        goToPrevSection(event);
+      }
+    } else {
+      if (direction < 0)
+        // Move panel info up
+        $currPanel.find('.panel__info').scrollTop($currPanel.find('.panel__info').scrollTop() - 15);
+      else if (direction > 0)
+        // Move panel info down
+        $currPanel.find('.panel__info').scrollTop($currPanel.find('.panel__info').scrollTop() + 15);
+
+      // Check if the bottom is reached for the panel info within the panels
+      if (
+        $currPanel.find('.panel__info').scrollTop() + $currPanel.find('.panel__info').innerHeight() >=
+        $currPanel.find('.panel__info')[0].scrollHeight
+      ) {
+        if (isPanelBottom) {
+          goToNextSection(event);
+          isPanelBottom = false;
+        } else {
+          setTimeout(function () {
+            isPanelBottom = true;
+          }, 500);
+        }
+      } else if ($currPanel.find('.panel__info').scrollTop() === 0) {
+        if (isPanelTop) {
+          goToPrevSection(event);
+          isPanelTop = false;
+        } else {
+          setTimeout(function () {
+            isPanelTop = true;
+          }, 500);
+        }
+      }
+    }
+  }
 };
 
 // Define wheel event handler
-document.addEventListener('wheel', scrollHadler, { passive: false });
+document.addEventListener('wheel', scrollHandler, { passive: false });
 
 $.fn.isYScrollable = function () {
-    return this[0].scrollHeight > this[0].clientHeight;
+  return this[0].scrollHeight > this[0].clientHeight;
 };
 
 /* Carousel Logic */
@@ -331,61 +322,88 @@ const $carousel = $('.carousel__track');
 const $slides = $('.project');
 
 const nextSlide = function ($slide) {
-    if ($slide.next().length > 0) {
-        return $slide.next();
-    } else {
-        return $slides.first();
-    }
+  if ($slide.next().length > 0) {
+    return $slide.next();
+  } else {
+    return $slides.first();
+  }
 };
 
 const prevSlide = function ($slide) {
-    if ($slide.prev().length > 0) {
-        return $slide.prev();
-    } else {
-        return $slides.last();
-    }
+  if ($slide.prev().length > 0) {
+    return $slide.prev();
+  } else {
+    return $slides.last();
+  }
 };
 
 $('.carousel__actions button').on('click', function (e) {
-    var i, j, $new_seat, ref;
-    const $lastSlide = $('.work .carousel__track .is-ref').removeClass('is-ref');
+  var i, j, $new_seat, ref;
+  const $lastSlide = $('.work .carousel__track .is-ref').removeClass('is-ref');
 
-    if ($(this).index() === 0) {
-        // Previous button clicked
-        $new_seat = nextSlide($lastSlide);
-        $carousel.removeClass('is-reversing');
-    } else {
-        // Next button clicked
-        $new_seat = prevSlide($lastSlide);
-        $carousel.addClass('is-reversing');
-    }
-    $new_seat.addClass('is-ref').css('order', 1);
+  if ($(this).index() === 0) {
+    // Previous button clicked
+    $new_seat = nextSlide($lastSlide);
+    $carousel.removeClass('is-reversing');
+  } else {
+    // Next button clicked
+    $new_seat = prevSlide($lastSlide);
+    $carousel.addClass('is-reversing');
+  }
+  $new_seat.addClass('is-ref').css('order', 1);
 
-    for (
-        i = j = 2, ref = $slides.length;
-        2 <= ref ? j <= ref : j >= ref;
-        i = 2 <= ref ? ++j : --j
-    ) {
-        $new_seat = nextSlide($new_seat).css('order', i);
-    }
+  for (i = j = 2, ref = $slides.length; 2 <= ref ? j <= ref : j >= ref; i = 2 <= ref ? ++j : --j) {
+    $new_seat = nextSlide($new_seat).css('order', i);
+  }
 
-    $carousel.removeClass('is-set');
-    return setTimeout(function () {
-        return $carousel.addClass('is-set');
-    }, 50);
+  $carousel.removeClass('is-set');
+  return setTimeout(function () {
+    return $carousel.addClass('is-set');
+  }, 50);
 });
 
 /* Nav Scroll */
 
 $('.nav__item').on('click', function () {
-    const href = $(this).find('a').attr('href');
-    currentIndex = $(this).index();
-    $(href)[0].scrollIntoView();
+  const href = $(this).find('a').attr('href');
+  currentIndex = $(this).index();
+  $(href)[0].scrollIntoView();
 });
 
 /* Nav Tab Underline Animation */
 $('.nav__list:has(.nav__item-underline)').each(function initialize() {
-    const $container = $(this);
+  const $container = $(this);
+  const $active = $container.find('li a.active').first();
+  const $underline = $container.find('.nav__item-underline');
+
+  const left = $active.position().left;
+  const width = $active.outerWidth();
+
+  $underline.css({ left, width });
+});
+
+const initialMargin = $('.nav__list .nav__item-underline').position().left;
+
+moveNavUnderline = function ($elem) {
+  const $targetdNavAnchor = $elem;
+  const $parent = $targetdNavAnchor.parent();
+  const $container = $parent.closest('.nav__list');
+  const $nav_item = $parent.closest('.nav__item');
+  const $underline = $container.find('.nav__item-underline');
+
+  const left = $nav_item.position().left + initialMargin;
+  const width = $nav_item.outerWidth();
+
+  $underline.css({ left, width });
+};
+
+$('.nav__list:has(.nav__item-underline) > li > a')
+  .on('mouseenter focus', function () {
+    moveNavUnderline($(this));
+  })
+  .on('mouseleave blur', function () {
+    const $this = $(this);
+    const $container = $this.closest('.nav__list');
     const $active = $container.find('li a.active').first();
     const $underline = $container.find('.nav__item-underline');
 
@@ -393,134 +411,99 @@ $('.nav__list:has(.nav__item-underline)').each(function initialize() {
     const width = $active.outerWidth();
 
     $underline.css({ left, width });
-});
-
-const initialMargin = $('.nav__list .nav__item-underline').position().left;
-
-moveNavUnderline = function ($elem) {
-    const $targetdNavAnchor = $elem;
-    const $parent = $targetdNavAnchor.parent();
-    const $container = $parent.closest('.nav__list');
-    const $nav_item = $parent.closest('.nav__item');
-    const $underline = $container.find('.nav__item-underline');
-
-    const left = $nav_item.position().left + initialMargin;
-    const width = $nav_item.outerWidth();
-
-    $underline.css({ left, width });
-};
-
-$('.nav__list:has(.nav__item-underline) > li > a')
-    .on('mouseenter focus', function () {
-        moveNavUnderline($(this));
-    })
-    .on('mouseleave blur', function () {
-        const $this = $(this);
-        const $container = $this.closest('.nav__list');
-        const $active = $container.find('li a.active').first();
-        const $underline = $container.find('.nav__item-underline');
-
-        const left = $active.position().left;
-        const width = $active.outerWidth();
-
-        $underline.css({ left, width });
-    });
+  });
 
 /* Experience Tab Underline Animation */
 const expTabHorAnimationInit = function () {
-    const $container = $(this);
-    const $active = $container.find('li.active').first();
-    const $underline = $container.find('.experience__lst-underline.horizontal');
+  const $container = $(this);
+  const $active = $container.find('li.active').first();
+  const $underline = $container.find('.experience__lst-underline.horizontal');
 
-    const left = $active.position().left;
-    const width = $active.outerWidth();
+  const left = $active.position().left;
+  const width = $active.outerWidth();
 
-    $underline.css({ left, width });
+  $underline.css({ left, width });
 };
 
 const handleExpTabHorMouseEnter = function () {
-    const $this = $(this);
-    const $parent = $this.parent();
-    const $container = $parent.closest('.experience__lst');
-    const $underline = $container.find('.experience__lst-underline.horizontal');
+  const $this = $(this);
+  const $parent = $this.parent();
+  const $container = $parent.closest('.experience__lst');
+  const $underline = $container.find('.experience__lst-underline.horizontal');
 
-    const left = $parent.position().left;
-    const width = $parent.outerWidth();
+  const left = $parent.position().left;
+  const width = $parent.outerWidth();
 
-    $underline.css({ left, width });
+  $underline.css({ left, width });
 };
 
 const handleExpTabHorMouseLeave = function () {
-    const $this = $(this);
-    const $container = $this.closest('.experience__lst');
-    const $active = $container.find('li.active').first();
-    const $underline = $container.find('.experience__lst-underline.horizontal');
+  const $this = $(this);
+  const $container = $this.closest('.experience__lst');
+  const $active = $container.find('li.active').first();
+  const $underline = $container.find('.experience__lst-underline.horizontal');
 
-    const left = $active.position().left;
-    const width = $active.outerWidth();
+  const left = $active.position().left;
+  const width = $active.outerWidth();
 
-    $underline.css({ left, width });
+  $underline.css({ left, width });
 };
 
 const expTabVerAnimationInit = function () {
-    const $container = $(this);
-    const $active = $container.find('li.active').first();
-    const $underline = $container.find('.experience__lst-underline.vertical');
+  const $container = $(this);
+  const $active = $container.find('li.active').first();
+  const $underline = $container.find('.experience__lst-underline.vertical');
 
-    const top = $active.position().top;
-    const height = $active.outerHeight();
+  const top = $active.position().top;
+  const height = $active.outerHeight();
 
-    $underline.css({ top, height });
+  $underline.css({ top, height });
 };
 
 const handleExpTabVerMouseEnter = function () {
-    const $this = $(this);
-    const $parent = $this.parent();
-    const $container = $parent.closest('.experience__lst');
-    const $underline = $container.find('.experience__lst-underline.vertical');
+  const $this = $(this);
+  const $parent = $this.parent();
+  const $container = $parent.closest('.experience__lst');
+  const $underline = $container.find('.experience__lst-underline.vertical');
 
-    const top = $parent.position().top;
-    const height = $parent.outerHeight();
+  const top = $parent.position().top;
+  const height = $parent.outerHeight();
 
-    $underline.css({ top, height });
+  $underline.css({ top, height });
 };
 
 const handleExpTabVerMouseLeave = function () {
-    const $this = $(this);
-    const $container = $this.closest('.experience__lst');
-    const $active = $container.find('li.active').first();
-    const $underline = $container.find('.experience__lst-underline.vertical');
+  const $this = $(this);
+  const $container = $this.closest('.experience__lst');
+  const $active = $container.find('li.active').first();
+  const $underline = $container.find('.experience__lst-underline.vertical');
 
-    const top = $active.position().top;
-    const height = $active.outerHeight();
+  const top = $active.position().top;
+  const height = $active.outerHeight();
 
-    $underline.css({ top, height });
+  $underline.css({ top, height });
 };
 
-$('.experience__lst:has(.experience__lst-underline.vertical)').each(
-    expTabVerAnimationInit
-);
+$('.experience__lst:has(.experience__lst-underline.vertical)').each(expTabVerAnimationInit);
 
 $('.experience__lst:has(.experience__lst-underline.vertical) > li > button')
-    .on('mouseenter focus', handleExpTabVerMouseEnter)
-    .on('mouseleave blur', handleExpTabVerMouseLeave);
+  .on('mouseenter focus', handleExpTabVerMouseEnter)
+  .on('mouseleave blur', handleExpTabVerMouseLeave);
 
-$('.experience__lst:has(.experience__lst-underline.horizontal)').each(
-    expTabHorAnimationInit
-);
+$('.experience__lst:has(.experience__lst-underline.horizontal)').each(expTabHorAnimationInit);
 
 $('.experience__lst:has(.experience__lst-underline.horizontal) > li > button')
-    .on('mouseenter focus', handleExpTabHorMouseEnter)
-    .on('mouseleave blur', handleExpTabHorMouseLeave);
+  .on('mouseenter focus', handleExpTabHorMouseEnter)
+  .on('mouseleave blur', handleExpTabHorMouseLeave);
 
 let isMobileSize = false;
 
 $(window).resize(function () {
-    if ($(this).width() <= 860 && !isMobileSize) {
-        isMobileSize = true;
-        document.removeEventListener('wheel', scrollHadler, { passive: false });
-    } else if ($(this).width() > 860) {
-        document.addEventListener('wheel', scrollHadler, { passive: false });
-        isMobileSize = false;
-    }
+  if ($(this).width() <= 860 && !isMobileSize) {
+    isMobileSize = true;
+    document.removeEventListener('wheel', scrollHandler, { passive: false });
+  } else if ($(this).width() > 860) {
+    document.addEventListener('wheel', scrollHandler, { passive: false });
+    isMobileSize = false;
+  }
 });
