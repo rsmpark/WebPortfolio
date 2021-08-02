@@ -740,6 +740,14 @@ button {
   transition: all 1.5s ease;
 }
 
+.panel__info ul li .inner_list .inner_list__items a {
+  color: inherit;
+}
+
+.panel__info ul li .inner_list .inner_list__items a:hover {
+  color: #fff
+}
+
 .panel__info ul li.drop__active .inner_list .inner_list__items {
   max-height: 300px;
   padding: 10px;
