@@ -40,13 +40,12 @@ h2 {
 }
 
 .section {
-  padding-top: 7rem;
+  padding-top: 9.5rem;
   padding-bottom: 2rem;
   max-width: 1024px;
   margin: auto;
   height: 100vh;
   font-size: 16px;
-  /* border: red 2px solid */
 }
 
 .section-title {
@@ -638,13 +637,11 @@ button {
   color: var(--third-color);
   overflow-y: auto;
   -ms-overflow-style: none;
-  /* padding-right: 25px;c */
   scrollbar-width: none;
 }
 
 .panel__info::-webkit-scrollbar {
   width: 19px;
-  /* margin-left: 36px; */
 }
 
 .panel__info::-webkit-scrollbar-track {
@@ -690,6 +687,10 @@ button {
   margin-left: 40px;
 }
 
+.panel__info ul .info__items.no_drop:hover {
+  margin-left: 0;
+}
+
 .panel__info ul .info__items.drop__active {
   margin-left: 40px;
 }
@@ -715,7 +716,7 @@ button {
   grid-template-rows: auto;
   max-width: 800px;
   padding: 0px;
-  /* margin: 15px 0px 20px 46px; */
+  margin: 0px 0px 0px 46px;
   list-style: none;
   max-height: 0;
   opacity: 0;
