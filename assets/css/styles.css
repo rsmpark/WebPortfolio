@@ -242,7 +242,7 @@ h2 {
 .home__desc {
   color: var(--third-color);
   line-height: 25px;
-  max-width: 510px;
+  max-width: 640px;
   margin: 0 0 40px;
 }
 
@@ -910,9 +910,9 @@ button {
 
 .project .project-info-card {
   position: absolute;
-  top: 70px;
-  left: 180px;
-  width: 15.5em;
+  top: 75px;
+  left: 170px;
+  width: 15.9em;
   height: 14.8em;
   opacity: 1;
   background-color: var(--fifth-color);
