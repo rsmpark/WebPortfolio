@@ -676,6 +676,7 @@ button {
   padding-left: 30px;
   margin-bottom: 35px;
   margin-left: 0px;
+  cursor: pointer;
   transition: margin-left 0.5s ease;
 }
 
@@ -713,6 +714,7 @@ button {
   position: relative;
   display: grid;
   grid-template-columns: repeat(2, minmax(140px, 400px));
+  cursor: default;
   grid-template-rows: auto;
   max-width: 800px;
   padding: 0px;
@@ -743,10 +745,11 @@ button {
 
 .panel__info ul li .inner_list .inner_list__items a {
   color: inherit;
+  transition: all 0.5s ease;
 }
 
 .panel__info ul li .inner_list .inner_list__items a:hover {
-  color: #fff
+  color: var(--second-color)
 }
 
 .panel__info ul li.drop__active .inner_list .inner_list__items {
