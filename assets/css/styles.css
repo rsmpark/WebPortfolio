@@ -18,6 +18,8 @@ body.blur .l-main>* {
   filter: blur(5px) brightness(0.7);
   transition-property: -moz-filter, -ms-filter, -o-filter, -webkit-filter, filter;
   transition-duration: 0.5s;
+  -moz-transition-property: -moz-filter, -ms-filter, -o-filter, -webkit-filter, filter;
+  -moz-transition-duration: 0.5s;
   pointer-events: none;
   user-select: none;
 }
@@ -25,6 +27,8 @@ body.blur .l-main>* {
 body .l-main>* {
   transition-property: -moz-filter, -ms-filter, -o-filter, -webkit-filter, filter;
   transition-duration: 0.5s;
+  -moz-transition-property: -moz-filter, -ms-filter, -o-filter, -webkit-filter, filter;
+  -moz-transition-duration: 0.5s;
 }
 
 h1 {
@@ -45,11 +49,14 @@ h2 {
 
 .section {
   padding-top: 9.5rem;
-  padding-bottom: 2rem;
-  max-width: 1024px;
+  padding-bottom: 3rem;
+  max-width: 1048px;
   margin: auto;
   height: 100vh;
   font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .section-title {
@@ -110,6 +117,7 @@ h2 {
   z-index: var(--z-fixed);
   background-color: var(--bg-color);
   transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
   padding: 0 60px;
 }
 
@@ -130,6 +138,7 @@ h2 {
   align-items: center;
   font-weight: var(--font-semi);
   transition: all 0.8s ease;
+  -moz-transition: all 0.8s ease;
 }
 
 .l-header.shadow .nav {
@@ -145,6 +154,7 @@ h2 {
     height: 100%;
     background-color: var(--second-color);
     transition: 0.5s;
+    -moz-transition: 0.5s;
   }
   .nav__list {
     flex-direction: column;
@@ -178,6 +188,7 @@ h2 {
   background: var(--second-color);
   will-change: left, width;
   transition: left .45s, width .3s;
+  -moz-transition: left .45s, width .3s;
 }
 
 .nav__link {
@@ -370,9 +381,11 @@ button {
   background: currentColor;
   -webkit-transform: translateX(-100%);
   -ms-transform: translateX(-100%);
+  -moz-transform: translateX(-100%);
   transform: translateX(-100%);
   -webkit-transition: -webkit-transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
   -webkit-transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  -moz-transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
   transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
@@ -390,7 +403,7 @@ button {
   line-height: 26px;
   grid-template-rows: 700px;
   grid-column-gap: 0;
-  grid-template-columns: 45% 55%;
+  grid-template-columns: 40% 62%;
   align-items: flex-start;
   text-align: initial;
 }
@@ -428,7 +441,7 @@ button {
   color: var(--third-color);
   width: 100%;
   height: 600px;
-  padding-right: 80px;
+  padding-right: 10px;
   overflow: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -480,6 +493,10 @@ button {
 
 /* ===== SKILLS =====*/
 
+#skills.section {
+  padding-bottom: 13rem;
+}
+
 .skills__container {
   row-gap: 2rem;
   text-align: center;
@@ -519,6 +536,7 @@ button {
   -webkit-filter: grayscale(100%);
   filter: grayscale(85%);
   transition: filter .3s ease-in-out;
+  -moz-transition: filter .3s ease-in-out;
 }
 
 .skills__icon:hover {
@@ -537,9 +555,11 @@ button {
   height: 37px;
 }
 
-.skills__img {}
-
 /* ===== EXPERIENCE =====*/
+
+#experience.section {
+  padding-bottom: 13rem;
+}
 
 .experience {
   max-width: 900px;
@@ -548,7 +568,7 @@ button {
 .experience__container {
   grid-template-columns: 15% 85%;
   text-align: initial;
-  margin: 60px 0 0 5px;
+  margin: 20px 0 0 5px;
 }
 
 .experience__lst {
@@ -564,6 +584,7 @@ button {
   height: 0px;
   background: var(--second-color);
   will-change: top, height;
+  -moz-transition: top .3s, height .3s;
   transition: top .3s, height .3s;
 }
 
@@ -592,6 +613,7 @@ button {
   color: var(--fourth-color);
   padding: 0px 25px 2px;
   border-left: 2px solid rgba(255, 255, 255, 0.25);
+  -moz-transition: all .4s;
   transition: all .4s;
 }
 
@@ -641,6 +663,7 @@ button {
   color: var(--third-color);
   overflow-y: auto;
   -ms-overflow-style: none;
+  -moz-overflow-style: none;
   scrollbar-width: none;
 }
 
@@ -655,6 +678,23 @@ button {
 }
 
 .panel__info::-webkit-scrollbar-thumb {
+  background-color: var(--third-color);
+  border-radius: 25px;
+  border: 7px solid transparent;
+  background-clip: content-box;
+}
+
+.panel__info::-moz-scrollbar {
+  width: 19px;
+}
+
+.panel__info::-moz-scrollbar-track {
+  background-color: rgba(70, 70, 70, 0.3);
+  border-left: 9.9px solid var(--bg-color);
+  border-right: 9.9px solid var(--bg-color);
+}
+
+.panel__info::-moz-scrollbar-thumb {
   background-color: var(--third-color);
   border-radius: 25px;
   border: 7px solid transparent;
@@ -766,6 +806,7 @@ button {
 .section.work {
   max-width: 1280px;
   width: 90%;
+  padding-bottom: 13rem;
 }
 
 .work__container {
@@ -812,11 +853,9 @@ button {
   position: relative;
   height: 470px;
   margin: 0 auto;
-  /* padding: 15px; */
   align-items: center;
   left: -100%;
   transform: translateX(100%);
-  /* transition: transform 2s ease; */
 }
 
 @media (min-width: 1081px) {
@@ -891,9 +930,8 @@ button {
   object-fit: cover;
   transition: 0.8s;
   cursor: pointer;
-  -webkit-filter: contrast(120%) grayscale(70%);
-  filter: contrast(100%) grayscale(70%);
-  transition: all .3s linear;
+  -webkit-filter: contrast(120%) grayscale(100%);
+  filter: contrast(100%) grayscale(100%);
 }
 
 .project:hover .work__img img {
@@ -908,7 +946,7 @@ button {
   background-color: rgb(0, 0, 0, 0.3);
   opacity: 1;
   z-index: 101;
-  transition: all .3s linear;
+  transition: opacity .3s linear;
 }
 
 .project:hover .overlay {
@@ -993,6 +1031,7 @@ button {
 
 .contact.section {
   max-width: 900px;
+  padding-bottom: 21rem;
 }
 
 .contact.section .heading {
@@ -1086,6 +1125,7 @@ button {
   right: 0;
   background: currentColor;
   -webkit-transform: translateX(-100%);
+  -moz-transform: translateX(-100%);
   -ms-transform: translateX(-100%);
   transform: translateX(-100%);
   -webkit-transition: -webkit-transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
@@ -1237,8 +1277,8 @@ button {
     padding-left: 55px;
   }
   .project .project-info-card {
-    top: 20%;
-    left: 51%;
+    top: 18%;
+    left: 48%;
   }
   .carousel__actions {
     width: 100%;
@@ -1344,6 +1384,7 @@ button {
     height: 2px;
     background: var(--second-color);
     will-change: left, width;
+    -moz-transition: left .3s, width .3s;
     transition: left .3s, width .3s;
   }
   .experience__item button {
