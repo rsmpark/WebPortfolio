@@ -28,7 +28,7 @@ function goToPrevSection(event) {
   setTimeout(moveNavUnderline.bind(null, $('.nav__item').eq(currentIndex).find('.nav__link')), 250);
 }
 
-function goToNextSection(event, $currSection) {
+function goToNextSection(event) {
   // Animate scroll
   currentIndex++;
   const href = $('.nav__item').eq(currentIndex).find('a').attr('href');
@@ -58,7 +58,7 @@ const scrollHandler = function (event) {
       // If bottom is not reached allow the default behaviour
       if (!bottomIsReached($currentSection)) return;
       // Go to next
-      goToNextSection(event, $currentSection);
+      goToNextSection(event);
     } else {
       // If previous index is negative, do nothing
       if (currentIndex - 1 < 0) return;
@@ -132,7 +132,7 @@ $.fn.isYScrollable = function () {
 $('.nav__item').on('click', function () {
   const href = $(this).find('a').attr('href');
   currentIndex = $(this).index();
-  $(href)[0].scrollIntoView();
+  smoothScroll($(href)[0].offsetTop);
 });
 
 let isMobileSize = false;
@@ -147,15 +147,12 @@ $(window).resize(function () {
   }
 });
 
-function smoothScroll(scrollTargetY, speed = 1000) {
+function smoothScroll(scrollTargetY, speed = 340) {
   let currentTime = 0;
   const scrollY = window.pageYOffset || document.documentElement.scrollTop;
   const derivedSpeed = speed;
 
-  // min time .1, max time .8 seconds
-  const time = Math.max(0.1, Math.min(Math.abs(scrollY - scrollTargetY) / derivedSpeed, 0.8));
-
-  // debugger;
+  const time = Math.max(0.1, Math.min(Math.abs(scrollY - scrollTargetY) / derivedSpeed, 1.5));
 
   // easing equations from https://github.com/danro/easing-js/blob/master/easing.js
   const easeInOutCubic = (pos) => {
@@ -166,11 +163,8 @@ function smoothScroll(scrollTargetY, speed = 1000) {
   function runAnimation() {
     currentTime += 1 / 60;
 
-    // console.log(time);
-
     let p = currentTime / time;
     let t = easeInOutCubic(p);
-    console.log(scrollY + (scrollTargetY - scrollY) * t);
 
     if (p < 1) {
       window.requestAnimationFrame(runAnimation);
