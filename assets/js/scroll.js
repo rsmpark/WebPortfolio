@@ -5,15 +5,6 @@ var $sections = $('.section');
 
 // Variable to hold the current section index
 var currentIndex = 0;
-var isAnimating = false;
-
-// Define the animation finish callback
-var stopAnimation = function () {
-  // 300 ms timeout to debounce the mouse wheel event
-  setTimeout(function () {
-    isAnimating = false;
-  }, 300);
-};
 
 // Function returns true if DOM element bottom is reached
 var bottomIsReached = function ($elem) {
@@ -28,16 +19,12 @@ var topIsReached = function ($elem) {
 };
 
 function goToPrevSection(event) {
-  // Set the animation state to true
-  isAnimating = true;
-
-  currentIndex--;
-
   // Animate scroll
+  currentIndex--;
   const href = $('.nav__item').eq(currentIndex).find('a').attr('href');
-  $(href)[0].scrollIntoView();
-  stopAnimation();
+  smoothScroll($(href)[0].offsetTop);
 
+  // Move navigation underline
   setTimeout(moveNavUnderline.bind(null, $('.nav__item').eq(currentIndex).find('.nav__link')), 250);
 }
 
@@ -45,13 +32,9 @@ function goToNextSection(event, $currSection) {
   // Animate scroll
   currentIndex++;
   const href = $('.nav__item').eq(currentIndex).find('a').attr('href');
-  // $(href)[0].scrollIntoView();
-  // stopAnimation();
   smoothScroll($(href)[0].offsetTop);
 
-  // Set the animation state to true
-  isAnimating = true;
-
+  // Move navigation underline
   setTimeout(moveNavUnderline.bind(null, $('.nav__item').eq(currentIndex).find('.nav__link')), 250);
 }
 
@@ -60,10 +43,6 @@ let isPanelTop = false;
 
 const scrollHandler = function (event) {
   event.preventDefault();
-  // If animation is in progress
-  // if (isAnimating) {
-  //   return;
-  // }
 
   // Get the current section
   var $currentSection = $($sections[currentIndex]);
@@ -72,74 +51,73 @@ const scrollHandler = function (event) {
   var direction = event.deltaY;
 
   // If not experience section
-  // if (currentIndex !== 3) {
-  if (direction > 0) {
-    // If next index is greater than sections count, do nothing
-    if (currentIndex + 1 >= $sections.length) return;
-    // If bottom is not reached allow the default behaviour
-    if (!bottomIsReached($currentSection)) return;
-    // Go to next
-    goToNextSection(event, $currentSection);
+  if (currentIndex !== 3) {
+    if (direction > 0) {
+      // If next index is greater than sections count, do nothing
+      if (currentIndex + 1 >= $sections.length) return;
+      // If bottom is not reached allow the default behaviour
+      if (!bottomIsReached($currentSection)) return;
+      // Go to next
+      goToNextSection(event, $currentSection);
+    } else {
+      // If previous index is negative, do nothing
+      if (currentIndex - 1 < 0) return;
+      // If top is not reached allow the default behaviour
+      if (!topIsReached($currentSection)) return;
+      // Go to prev
+      goToPrevSection(event);
+    }
   } else {
-    // If previous index is negative, do nothing
-    if (currentIndex - 1 < 0) return;
-    // If top is not reached allow the default behaviour
-    if (!topIsReached($currentSection)) return;
-    // Go to prev
-    goToPrevSection(event);
+    if (!$currPanel.find('.panel__info').isYScrollable()) {
+      if (direction > 0) {
+        // If next index is greater than sections count, do nothing
+        if (currentIndex + 1 >= $sections.length) return;
+        // If bottom is not reached allow the default behaviour
+        if (!bottomIsReached($currentSection)) return;
+        // Go to next
+        goToNextSection(event);
+      } else {
+        // If previous index is negative, do nothing
+        if (currentIndex - 1 < 0) return;
+        // If top is not reached allow the default behaviour
+        if (!topIsReached($currentSection)) return;
+
+        // Go to prev
+        goToPrevSection(event);
+      }
+    } else {
+      if (direction < 0)
+        // Move panel info up
+        $currPanel.find('.panel__info').scrollTop($currPanel.find('.panel__info').scrollTop() - 15);
+      else if (direction > 0)
+        // Move panel info down
+        $currPanel.find('.panel__info').scrollTop($currPanel.find('.panel__info').scrollTop() + 15);
+
+      // Check if the bottom is reached for the panel info within the panels
+      if (
+        $currPanel.find('.panel__info').scrollTop() + $currPanel.find('.panel__info').innerHeight() >=
+        $currPanel.find('.panel__info')[0].scrollHeight
+      ) {
+        if (isPanelBottom) {
+          goToNextSection(event);
+          isPanelBottom = false;
+        } else {
+          setTimeout(function () {
+            isPanelBottom = true;
+          }, 500);
+        }
+      } else if ($currPanel.find('.panel__info').scrollTop() === 0) {
+        if (isPanelTop) {
+          goToPrevSection(event);
+          isPanelTop = false;
+        } else {
+          setTimeout(function () {
+            isPanelTop = true;
+          }, 500);
+        }
+      }
+    }
   }
-  // } else {
-  //   if (!$currPanel.find('.panel__info').isYScrollable()) {
-  //     if (direction > 0) {
-  //       // If next index is greater than sections count, do nothing
-  //       if (currentIndex + 1 >= $sections.length) return;
-  //       // If bottom is not reached allow the default behaviour
-  //       if (!bottomIsReached($currentSection)) return;
-  //       // Go to next
-  //       goToNextSection(event);
-  //     } else {
-  //       // If previous index is negative, do nothing
-  //       if (currentIndex - 1 < 0) return;
-  //       // If top is not reached allow the default behaviour
-  //       if (!topIsReached($currentSection)) return;
-
-  //       // Go to prev
-  //       goToPrevSection(event);
-  //     }
-  //   } else {
-  //     if (direction < 0)
-  //       // Move panel info up
-  //       $currPanel.find('.panel__info').scrollTop($currPanel.find('.panel__info').scrollTop() - 15);
-  //     else if (direction > 0)
-  //       // Move panel info down
-  //       $currPanel.find('.panel__info').scrollTop($currPanel.find('.panel__info').scrollTop() + 15);
-
-  //     // Check if the bottom is reached for the panel info within the panels
-  //     if (
-  //       $currPanel.find('.panel__info').scrollTop() + $currPanel.find('.panel__info').innerHeight() >=
-  //       $currPanel.find('.panel__info')[0].scrollHeight
-  //     ) {
-  //       if (isPanelBottom) {
-  //         goToNextSection(event);
-  //         isPanelBottom = false;
-  //       } else {
-  //         setTimeout(function () {
-  //           isPanelBottom = true;
-  //         }, 500);
-  //       }
-  //     } else if ($currPanel.find('.panel__info').scrollTop() === 0) {
-  //       if (isPanelTop) {
-  //         goToPrevSection(event);
-  //         isPanelTop = false;
-  //       } else {
-  //         setTimeout(function () {
-  //           isPanelTop = true;
-  //         }, 500);
-  //       }
-  //     }
-  //   }
-  //   debugger;
-  // }
 };
 
 // Define wheel event handler
