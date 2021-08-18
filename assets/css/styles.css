@@ -725,12 +725,20 @@ button {
   transition: margin-left 0.5s ease;
 }
 
+.panel__info ul .info__items.no_list {
+  cursor: default;
+}
+
 .panel__info ul .info__items:last-child {
   margin-bottom: 10px;
 }
 
 .panel__info ul .info__items:hover {
   margin-left: 40px;
+}
+
+.panel__info ul .info__items.no_list:hover {
+  margin-left: 0px;
 }
 
 .panel__info ul .info__items.no_drop:hover {
@@ -824,6 +832,7 @@ button {
   margin: 0 auto;
   position: absolute;
   height: 480px;
+  bottom: 12%;
 }
 
 .carousel__actions {
@@ -832,8 +841,8 @@ button {
   width: 110%;
   margin: 0 auto;
   justify-content: space-between;
-  top: 52%;
-  left: 50%;
+  top: 42%;
+  left: 50.5%;
   z-index: 100;
   transform: translateY(-50%) translateX(-50%);
 }
@@ -935,7 +944,7 @@ button {
   filter: contrast(100%) grayscale(100%);
 }
 
-.project .work__img:hover img {
+.project:hover img {
   filter: none
 }
 
@@ -950,7 +959,7 @@ button {
   transition: opacity .3s linear;
 }
 
-.project .work__img:hover .overlay {
+.project:hover .overlay {
   opacity: 0
 }
 
@@ -966,7 +975,7 @@ button {
   z-index: 102;
 }
 
-.project .work__img:hover .project-info-card {
+.project:hover .project-info-card {
   opacity: 1;
 }
 
