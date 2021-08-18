@@ -287,13 +287,14 @@ h2 {
 .home__social-icon {
   width: max-content;
   margin-bottom: 0;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   color: var(--first-color);
   padding: 7px;
+  transition: color 0.2s;
 }
 
 .home__social-icon:hover {
-  color: var(--first-color);
+  color: var(--second-color);
 }
 
 .home__img {
@@ -934,7 +935,7 @@ button {
   filter: contrast(100%) grayscale(100%);
 }
 
-.project:hover .work__img img {
+.project .work__img:hover img {
   filter: none
 }
 
@@ -949,7 +950,7 @@ button {
   transition: opacity .3s linear;
 }
 
-.project:hover .overlay {
+.project .work__img:hover .overlay {
   opacity: 0
 }
 
@@ -965,7 +966,7 @@ button {
   z-index: 102;
 }
 
-.project:hover .project-info-card {
+.project .work__img:hover .project-info-card {
   opacity: 1;
 }
 
@@ -1008,9 +1009,14 @@ button {
 .project .links a {
   width: max-content;
   margin-bottom: var(--mb-2);
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   color: var(--first-color);
   padding-right: 12px;
+  transition: color .3s;
+}
+
+.project .links a:hover {
+  color: var(--second-color)
 }
 
 .project .links i {
@@ -1021,7 +1027,7 @@ button {
   display: inline-block;
   letter-spacing: 1.2px;
   font-family: var(--code-font);
-  font-size: 0.7em;
+  font-size: 0.8em;
   font-weight: 100;
   margin-left: 2px;
   margin-right: 19px;
