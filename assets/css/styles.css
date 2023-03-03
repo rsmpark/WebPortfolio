@@ -734,11 +734,7 @@ button {
 }
 
 .panel__info ul .info__items:hover {
-  margin-left: 40px;
-}
-
-.panel__info ul .info__items.no_list:hover {
-  margin-left: 0px;
+  margin-left: 25px;
 }
 
 .panel__info ul .info__items.no_drop:hover {
